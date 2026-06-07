@@ -380,65 +380,53 @@
   z-index: 2;
 }
 
-/* Showcase IPTV — carrusel producto */
+/* Showcase IPTV — carrusel a proporción 4:3 como el resto del timeline */
 .timeline-step__media--iptv {
-  aspect-ratio: auto;
-  min-height: 380px;
   background: var(--navy-deep);
-  display: flex;
-  flex-direction: column;
 }
 
 .timeline-step__media--iptv > .iptv-showcase {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-}
-
-.iptv-showcase__top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.65rem 0.85rem 0.5rem;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .iptv-showcase__brand {
-  font-size: 0.5625rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.92);
+  top: 0.85rem;
+  left: 0.85rem;
+  z-index: 3;
 }
 
 .iptv-showcase__counter {
+  position: absolute;
+  top: 0.95rem;
+  right: 0.85rem;
+  z-index: 3;
+  padding: 0.3rem 0.55rem;
   font-size: 0.5625rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.88);
   font-variant-numeric: tabular-nums;
+  background: rgba(11, 20, 64, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
 }
 
 .iptv-showcase__viewport {
-  position: relative;
-  flex: 1;
-  min-height: 280px;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
 .iptv-showcase__track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 280px;
+  position: absolute;
+  inset: 0;
 }
 
 .iptv-showcase__slide {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
   opacity: 0;
   visibility: hidden;
   transition:
@@ -452,38 +440,28 @@
   z-index: 1;
 }
 
-.iptv-showcase__slide img {
-  flex: 1;
+.iptv-showcase__img {
   width: 100%;
   height: 100%;
-  min-height: 220px;
-  object-fit: contain;
-  object-position: center;
-  background: radial-gradient(ellipse at 50% 40%, rgba(21, 41, 130, 0.18) 0%, transparent 70%);
+  object-fit: cover;
+  object-position: center center;
 }
 
-.iptv-showcase__caption {
-  flex-shrink: 0;
-  margin: 0;
-  padding: 0.55rem 0.85rem 0.65rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: rgba(255, 255, 255, 0.88);
-  text-align: center;
-  background: linear-gradient(to top, rgba(11, 20, 64, 0.92) 0%, rgba(11, 20, 64, 0.55) 100%);
-}
+.iptv-showcase__img--01 { object-position: center 42%; }
+.iptv-showcase__img--02 { object-position: center 38%; }
+.iptv-showcase__img--03 { object-position: center 40%; }
+.iptv-showcase__img--04 { object-position: center 48%; }
 
 .iptv-showcase__progress {
   position: absolute;
   left: 0.85rem;
   right: 0.85rem;
-  bottom: 0;
+  bottom: 3.35rem;
   height: 2px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.16);
   border-radius: var(--radius-pill);
   overflow: hidden;
-  z-index: 2;
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -496,12 +474,17 @@
 }
 
 .iptv-showcase__footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 0.65rem 0.7rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.65rem 0.75rem 0.75rem;
+  background: linear-gradient(to top, rgba(11, 20, 64, 0.88) 0%, rgba(11, 20, 64, 0.45) 72%, transparent 100%);
 }
 
 .iptv-showcase__nav {
@@ -510,17 +493,17 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.92);
   cursor: pointer;
   transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .iptv-showcase__nav:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .iptv-showcase__nav:focus-visible {
@@ -545,7 +528,7 @@
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.28);
   cursor: pointer;
   transition: transform 0.25s var(--ease), background 0.25s var(--ease), width 0.25s var(--ease);
 }
@@ -562,25 +545,12 @@
 }
 
 .timeline-step__media--iptv figcaption {
-  position: relative;
-  bottom: auto;
-  left: auto;
-  right: auto;
-  margin: 0;
-  padding: 0.45rem 0.85rem 0.55rem;
-  font-size: 0.5625rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
-  background: transparent;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0;
+  z-index: 4;
+  bottom: 3.55rem;
 }
 
 .timeline-step.is-active .timeline-step__media--iptv {
-  box-shadow:
-    0 4px 24px rgba(11, 20, 64, 0.18),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  box-shadow: 0 4px 24px rgba(11, 20, 64, 0.1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -594,18 +564,13 @@
 }
 
 @media (max-width: 640px) {
-  .timeline-step__media--iptv {
-    min-height: 340px;
+  .timeline-step__media--iptv figcaption {
+    bottom: 3.35rem;
+    font-size: 0.5625rem;
   }
 
-  .iptv-showcase__viewport,
-  .iptv-showcase__track {
-    min-height: 240px;
-  }
-
-  .iptv-showcase__caption {
-    font-size: 0.625rem;
-    padding-inline: 0.65rem;
+  .iptv-showcase__progress {
+    bottom: 3.1rem;
   }
 }
 
@@ -624,9 +589,78 @@
   max-width: 52ch;
 }
 
-/* Ficha Mercado Público — credencial institucional */
+/* Ficha Mercado Público — resumen compacto en timeline */
+.mp-summary {
+  margin-bottom: 1.15rem;
+  padding: 0.85rem 0.95rem;
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.mp-summary__row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.mp-summary__seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.6rem;
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: rgba(21, 41, 130, 0.06);
+  border: 1px solid rgba(21, 41, 130, 0.12);
+  border-radius: var(--radius-pill);
+}
+
+.mp-summary__seal .icon {
+  color: var(--navy);
+}
+
+.mp-summary__score {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--navy);
+  padding: 0.28rem 0.55rem;
+  background: rgba(21, 41, 130, 0.05);
+  border-radius: var(--radius-pill);
+}
+
+.mp-summary__meta {
+  margin: 0 0 0.75rem;
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.mp-summary__btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Detalle ficha MP — dentro del popup */
+.mp-ficha--dialog {
+  margin-bottom: 0;
+}
+
+.mp-ficha--dialog .mp-ficha__panel {
+  border-color: rgba(21, 41, 130, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 28px rgba(11, 20, 64, 0.06);
+}
+
 .mp-ficha {
-  margin-bottom: 1.35rem;
+  margin-bottom: 0;
 }
 
 .mp-ficha__header {
@@ -791,19 +825,12 @@
   color: var(--ink-secondary);
 }
 
-.timeline-step.is-active .mp-ficha__panel {
-  border-color: rgba(21, 41, 130, 0.22);
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.9) inset,
-    0 10px 28px rgba(11, 20, 64, 0.06);
-}
-
 @media (max-width: 820px) {
-  .mp-ficha__panel {
+  .mp-ficha--dialog .mp-ficha__panel {
     grid-template-columns: 1fr;
   }
 
-  .mp-ficha__score {
+  .mp-ficha--dialog .mp-ficha__score {
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
@@ -815,26 +842,26 @@
     text-align: left;
   }
 
-  .mp-ficha__score-ring {
+  .mp-ficha--dialog .mp-ficha__score-ring {
     width: 3.5rem;
     height: 3.5rem;
     flex-shrink: 0;
   }
 
-  .mp-ficha__metrics {
+  .mp-ficha--dialog .mp-ficha__metrics {
     grid-template-columns: 1fr;
   }
 
-  .mp-ficha__metric {
+  .mp-ficha--dialog .mp-ficha__metric {
     border-right: none;
     border-bottom: 1px solid var(--border);
   }
 
-  .mp-ficha__metric:last-child {
+  .mp-ficha--dialog .mp-ficha__metric:last-child {
     border-bottom: none;
   }
 
-  .mp-ficha__legal {
+  .mp-ficha--dialog .mp-ficha__legal {
     grid-template-columns: 1fr;
     gap: 0.65rem;
   }

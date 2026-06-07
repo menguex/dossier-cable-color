@@ -346,6 +346,62 @@
     setTimeout(function () { coverageMap.invalidateSize(); }, 200);
   }
 
+  function initHqMap() {
+    const mapEl = document.getElementById('hqMap');
+    const section = document.getElementById('contacto');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    const HQ = { lat: -30.6022281, lng: -71.2041380 };
+    let hqMap = null;
+    let started = false;
+
+    function buildMap() {
+      if (started) return;
+      started = true;
+
+      hqMap = L.map('hqMap', {
+        scrollWheelZoom: false,
+        dragging: !reducedMotion,
+        zoomControl: true,
+        attributionControl: true
+      }).setView([HQ.lat, HQ.lng], 16);
+
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19,
+        minZoom: 13
+      }).addTo(hqMap);
+
+      L.marker([HQ.lat, HQ.lng], {
+        icon: createMarkerIcon('map-marker--coquimbo', true, 'Casa matriz')
+      }).addTo(hqMap).bindPopup(
+        '<strong>Casa matriz</strong><br>Victoria 381 Of. 203<br>Ovalle, Región de Coquimbo',
+        { className: 'coverage-popup', maxWidth: 240 }
+      ).openPopup();
+
+      window.setTimeout(function () {
+        if (hqMap) hqMap.invalidateSize();
+      }, 180);
+    }
+
+    if (!section) {
+      buildMap();
+      return;
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          buildMap();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: '120px 0px', threshold: 0.08 });
+
+    observer.observe(section);
+  }
+
   /* Smooth anchor scroll */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
@@ -409,27 +465,33 @@
   initSparkles();
   initPreloader();
   initCoverageMap();
+  initHqMap();
   initIptvShowcase();
-  initCompanyDialog();
+  initDialogTriggers();
   onScroll();
 
-  function initCompanyDialog() {
-    const dialog = document.getElementById('companyInfoDialog');
-    const openBtn = document.getElementById('companyInfoBtn');
-    if (!dialog || !openBtn) return;
+  function initDialogTriggers() {
+    [
+      ['companyInfoBtn', 'companyInfoDialog'],
+      ['mpInfoBtn', 'mpInfoDialog']
+    ].forEach(function (pair) {
+      const openBtn = document.getElementById(pair[0]);
+      const dialog = document.getElementById(pair[1]);
+      if (!openBtn || !dialog) return;
 
-    openBtn.addEventListener('click', function () {
-      if (typeof dialog.showModal === 'function') dialog.showModal();
-    });
-
-    dialog.querySelectorAll('[data-dialog-close]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        dialog.close();
+      openBtn.addEventListener('click', function () {
+        if (typeof dialog.showModal === 'function') dialog.showModal();
       });
-    });
 
-    dialog.addEventListener('click', function (event) {
-      if (event.target === dialog) dialog.close();
+      dialog.querySelectorAll('[data-dialog-close]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          dialog.close();
+        });
+      });
+
+      dialog.addEventListener('click', function (event) {
+        if (event.target === dialog) dialog.close();
+      });
     });
   }
 
@@ -542,21 +604,27 @@
     goTo(0);
   }
 
-  /* Precarga: logo header, hero y fondo del hero */
+  /* Precarga: logo Cable Color visible al menos 2 s */
   function initPreloader() {
     const preloader = document.getElementById('sitePreloader');
     const fill = document.getElementById('preloaderFill');
     if (!preloader) return;
 
+    const MIN_VISIBLE_MS = reducedMotion ? 800 : 2000;
+    const MAX_WAIT_MS = reducedMotion ? 3200 : 8000;
+    const startedAt = performance.now();
+
+    const preloaderLogo = document.querySelector('.site-preloader__logo');
     const headerLogo = document.querySelector('.site-header__logo');
     const heroLogo = document.querySelector('.site-hero__brand-logo');
     const heroBg = new Image();
     heroBg.src = 'assets/stock/patagonia.jpg';
 
-    const assets = [headerLogo, heroLogo, heroBg].filter(Boolean);
+    const assets = [preloaderLogo, headerLogo, heroLogo, heroBg].filter(Boolean);
     let loaded = 0;
     const total = assets.length;
     let dismissed = false;
+    let ready = false;
 
     function setProgress() {
       if (fill) {
@@ -564,7 +632,7 @@
       }
     }
 
-    function dismiss() {
+    function dismissNow() {
       if (dismissed) return;
       dismissed = true;
       if (fill) fill.style.width = '100%';
@@ -575,10 +643,23 @@
       }, reducedMotion ? 200 : 600);
     }
 
+    function tryDismiss() {
+      if (dismissed || !ready) return;
+      const remaining = MIN_VISIBLE_MS - (performance.now() - startedAt);
+      window.setTimeout(dismissNow, Math.max(0, remaining));
+    }
+
+    function markReady() {
+      if (ready) return;
+      ready = true;
+      if (fill) fill.style.width = '100%';
+      tryDismiss();
+    }
+
     function markLoaded() {
       loaded += 1;
       setProgress();
-      if (loaded >= total) dismiss();
+      if (loaded >= total) markReady();
     }
 
     setProgress();
@@ -592,7 +673,7 @@
       }
     });
 
-    window.addEventListener('load', dismiss, { once: true });
-    window.setTimeout(dismiss, reducedMotion ? 400 : 2200);
+    window.addEventListener('load', markReady, { once: true });
+    window.setTimeout(markReady, MAX_WAIT_MS);
   }
 })();

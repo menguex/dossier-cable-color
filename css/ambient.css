@@ -216,21 +216,9 @@
   z-index: 1;
 }
 
-/* Contacto: halo suave */
-#contacto {
+/* Contact footer glow handled in sections.css */
+.contact-footer {
   position: relative;
-}
-
-#contacto::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(90%, 640px);
-  height: 280px;
-  background: radial-gradient(ellipse, rgba(21, 41, 130, 0.06) 0%, transparent 70%);
-  pointer-events: none;
 }
 
 /* Cards con hover shimmer sutil */

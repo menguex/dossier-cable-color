@@ -210,57 +210,20 @@
               </div>
               <h2 class="timeline-step__title">Registro oficial de proveedor del Estado</h2>
               <p class="timeline-step__lead">Inscripción vigente en el Registro de Proveedores del Estado, con comportamiento base 5/5 y sin sanciones en los últimos 24 meses.</p>
-              <div class="mp-ficha" aria-label="Datos oficiales de la ficha Mercado Público">
-                <div class="mp-ficha__header">
-                  <span class="mp-ficha__seal">
+              <div class="mp-summary">
+                <div class="mp-summary__row">
+                  <span class="mp-summary__seal">
                     <span class="icon icon--sm"><svg><use href="#i-check"/></svg></span>
                     Proveedor HÁBIL
                   </span>
-                  <span class="mp-ficha__source">Ficha Mercado Público · 6 jun 2026</span>
+                  <span class="mp-summary__score">Comportamiento 5/5</span>
                 </div>
-                <div class="mp-ficha__panel">
-                  <div class="mp-ficha__score" aria-label="Comportamiento base 5 de 5">
-                    <span class="mp-ficha__score-ring" aria-hidden="true">
-                      <span class="mp-ficha__score-value">5/5</span>
-                    </span>
-                    <span class="mp-ficha__score-label">Comportamiento base</span>
-                    <span class="mp-ficha__score-note">Sin sanciones · 24 meses</span>
-                  </div>
-                  <div class="mp-ficha__metrics">
-                    <div class="mp-ficha__metric">
-                      <span class="mp-ficha__metric-label">Ventas MP</span>
-                      <strong class="mp-ficha__metric-value">$62.456.092</strong>
-                      <span class="mp-ficha__metric-note">Dic 2025 – dic 2026</span>
-                    </div>
-                    <div class="mp-ficha__metric">
-                      <span class="mp-ficha__metric-label">Habilidad</span>
-                      <strong class="mp-ficha__metric-value">HÁBIL</strong>
-                      <span class="mp-ficha__metric-note">Registro de Proveedores</span>
-                    </div>
-                    <div class="mp-ficha__metric">
-                      <span class="mp-ficha__metric-label">Acreditación</span>
-                      <strong class="mp-ficha__metric-value">01-02-2027</strong>
-                      <span class="mp-ficha__metric-note">Vigencia acreditado</span>
-                    </div>
-                  </div>
-                </div>
-                <dl class="mp-ficha__legal">
-                  <div class="mp-ficha__legal-item">
-                    <dt>RUT</dt>
-                    <dd>77.123.870-k</dd>
-                  </div>
-                  <div class="mp-ficha__legal-item">
-                    <dt>Domicilio legal</dt>
-                    <dd>Victoria 381 Of. 203, Ovalle</dd>
-                  </div>
-                  <div class="mp-ficha__legal-item">
-                    <dt>Representante legal</dt>
-                    <dd>Rodrigo Alejandro Jara Ovalle</dd>
-                  </div>
-                </dl>
+                <p class="mp-summary__meta">Acreditación vigente hasta 01-02-2027 · Ficha Mercado Público · 6 jun 2026</p>
+                <button type="button" class="btn btn--sm btn--ghost mp-summary__btn" id="mpInfoBtn" aria-haspopup="dialog" aria-controls="mpInfoDialog">
+                  Ver detalle de la ficha <span class="btn__arrow">→</span>
+                </button>
               </div>
               <div class="timeline-step__actions">
-                <a href="Ficha_PDF_20260606_10_29.pdf" class="btn btn--sm btn--ghost" target="_blank" rel="noopener">Ver ficha PDF <span class="btn__arrow">→</span></a>
                 <a href="#cobertura" class="btn btn--sm">Ver cobertura <span class="btn__arrow">→</span></a>
               </div>
             </div>
@@ -623,37 +586,31 @@
         <article class="timeline-step timeline-step--flip site-section" id="solucion">
           <div class="timeline-step__marker" aria-hidden="true"></div>
           <div class="timeline-step__grid">
-            <figure class="timeline-step__media timeline-step__media--iptv">
+            <figure class="timeline-step__media timeline-step__media--iptv timeline-step__media--overlay">
               <div class="iptv-showcase" data-iptv-showcase aria-roledescription="carrusel" tabindex="0">
-                <div class="iptv-showcase__top">
-                  <span class="iptv-showcase__brand">CableColor TV</span>
-                  <span class="iptv-showcase__counter" aria-live="polite">
-                    <span class="iptv-showcase__counter-current">1</span>
-                    <span class="iptv-showcase__counter-sep">/</span>
-                    <span class="iptv-showcase__counter-total">4</span>
-                  </span>
-                </div>
                 <div class="iptv-showcase__viewport">
                   <div class="iptv-showcase__track">
                     <article class="iptv-showcase__slide is-active" data-slide="0" aria-hidden="false">
-                      <img src="assets/iptv/slide-01-contenido-flexible.jpeg" alt="CableColor TV: contenido en vivo donde, cuando y como prefiera" width="1200" height="675" loading="eager" decoding="async">
-                      <p class="iptv-showcase__caption">Contenido en vivo donde, cuando y como prefiera</p>
+                      <img src="assets/iptv/slide-01-contenido-flexible.jpeg" alt="CableColor TV: contenido en vivo donde, cuando y como prefiera" class="iptv-showcase__img iptv-showcase__img--01" width="1200" height="675" loading="eager" decoding="async">
                     </article>
                     <article class="iptv-showcase__slide" data-slide="1" aria-hidden="true">
-                      <img src="assets/iptv/slide-02-multi-dispositivo.jpeg" alt="CableColor TV: libertad de ver televisión en cualquier dispositivo" width="900" height="1200" loading="lazy" decoding="async">
-                      <p class="iptv-showcase__caption">Televisión en cualquier dispositivo</p>
+                      <img src="assets/iptv/slide-02-multi-dispositivo.jpeg" alt="CableColor TV: libertad de ver televisión en cualquier dispositivo" class="iptv-showcase__img iptv-showcase__img--02" width="900" height="1200" loading="lazy" decoding="async">
                     </article>
                     <article class="iptv-showcase__slide" data-slide="2" aria-hidden="true">
-                      <img src="assets/iptv/slide-03-calidad-profesional.jpeg" alt="CableColor TV: televisión confiable de calidad profesional" width="1200" height="675" loading="lazy" decoding="async">
-                      <p class="iptv-showcase__caption">Televisión confiable de calidad profesional</p>
+                      <img src="assets/iptv/slide-03-calidad-profesional.jpeg" alt="CableColor TV: televisión confiable de calidad profesional" class="iptv-showcase__img iptv-showcase__img--03" width="1200" height="675" loading="lazy" decoding="async">
                     </article>
                     <article class="iptv-showcase__slide" data-slide="3" aria-hidden="true">
-                      <img src="assets/iptv/slide-04-en-vivo-deportes.jpeg" alt="CableColor TV: TV en directo, deportes en vivo y mejores canales" width="1600" height="900" loading="lazy" decoding="async">
-                      <p class="iptv-showcase__caption">TV en directo · deportes en vivo · mejores canales</p>
+                      <img src="assets/iptv/slide-04-en-vivo-deportes.jpeg" alt="CableColor TV: TV en directo, deportes en vivo y mejores canales" class="iptv-showcase__img iptv-showcase__img--04" width="1600" height="900" loading="lazy" decoding="async">
                     </article>
                   </div>
                   <div class="iptv-showcase__progress" aria-hidden="true"><span class="iptv-showcase__progress-fill"></span></div>
                 </div>
+                <span class="timeline-step__badge timeline-step__badge--primary iptv-showcase__brand">CableColor TV</span>
+                <span class="iptv-showcase__counter" aria-live="polite">
+                  <span class="iptv-showcase__counter-current">1</span>
+                  <span class="iptv-showcase__counter-sep">/</span>
+                  <span class="iptv-showcase__counter-total">4</span>
+                </span>
                 <div class="iptv-showcase__footer">
                   <button type="button" class="iptv-showcase__nav" data-dir="prev" aria-label="Imagen anterior">
                     <span class="icon icon--sm"><svg><use href="#i-chevron-left"/></svg></span>
@@ -745,100 +702,198 @@
       </div>
     </div>
 
-    <!-- 04 · CONTACTO -->
-    <section class="site-section site-section--alt" id="contacto">
-      <div class="site-section__inner">
-        <p class="section-label reveal"><span class="section-label__num">04</span> · Contacto</p>
-        <h2 class="reveal">Contacto</h2>
-        <p class="section-lead reveal">Quedamos a disposición para profundizar los aspectos técnicos, realizar visitas de levantamiento y desarrollar una propuesta definitiva acorde a los requerimientos del proyecto.</p>
+    <!-- 04 · CONTACTO · Footer -->
+    <section class="contact-footer site-section" id="contacto" aria-labelledby="contacto-title">
+      <div class="contact-footer__glow" aria-hidden="true"></div>
+      <div class="contact-footer__inner">
+        <header class="contact-footer__head reveal">
+          <p class="section-label section-label--light"><span class="section-label__num">04</span> · Contacto</p>
+          <h2 id="contacto-title">Hablemos de su proyecto</h2>
+          <p class="contact-footer__lead">Quedamos a disposición para profundizar los aspectos técnicos, realizar visitas de levantamiento y desarrollar una propuesta definitiva acorde a los requerimientos del proyecto.</p>
+        </header>
 
-        <div class="contact-table-wrap reveal">
-          <table class="contact-table">
-            <thead>
-              <tr>
-                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-user"/></svg></span> Nombre</span></th>
-                <th scope="col">Cargo</th>
-                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span> Correo laboral</span></th>
-                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span> Teléfono laboral</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Rodrigo Alejandro Jara Ovalle</strong></td>
-                <td>Gerente General</td>
-                <td><a href="mailto:rjara@unolimitada.cl">rjara@unolimitada.cl</a></td>
-                <td class="contact-table__na" aria-label="Teléfono no publicado">—</td>
-              </tr>
-              <tr>
-                <td><strong>Karina Sofía Rivera González</strong></td>
-                <td>Líder Comercial</td>
-                <td><a href="mailto:comercial@unolimitada.cl">comercial@unolimitada.cl</a></td>
-                <td><a href="tel:+56989028179">+56 9 8902 8179</a></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="contact-footer__grid reveal">
+          <div class="contact-footer__panel">
+            <div class="contact-footer__team">
+              <article class="contact-footer__card">
+                <p class="contact-footer__role">Gerente General</p>
+                <h3 class="contact-footer__name">Rodrigo Alejandro Jara Ovalle</h3>
+                <a class="contact-footer__link" href="mailto:rjara@unolimitada.cl">
+                  <span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span>
+                  rjara@unolimitada.cl
+                </a>
+              </article>
+              <article class="contact-footer__card contact-footer__card--primary">
+                <p class="contact-footer__role">Líder Comercial</p>
+                <h3 class="contact-footer__name">Karina Sofía Rivera González</h3>
+                <a class="contact-footer__link" href="mailto:comercial@unolimitada.cl">
+                  <span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span>
+                  comercial@unolimitada.cl
+                </a>
+                <a class="contact-footer__link" href="tel:+56989028179">
+                  <span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span>
+                  +56 9 8902 8179
+                </a>
+              </article>
+            </div>
+
+            <div class="contact-footer__actions">
+              <a href="mailto:comercial@unolimitada.cl" class="btn btn--sm">
+                <span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span>
+                Escríbanos
+              </a>
+              <a href="tel:+56989028179" class="btn btn--sm btn--light">Llamar ahora</a>
+            </div>
+
+            <div class="contact-footer__hq">
+              <h3 class="contact-footer__hq-title">
+                <span class="icon icon--sm"><svg><use href="#i-pin"/></svg></span>
+                Casa matriz
+              </h3>
+              <address class="contact-footer__address">
+                Victoria 381 Of. 203<br>
+                Ovalle, Región de Coquimbo, Chile
+              </address>
+              <a class="contact-footer__maps-link" href="https://www.google.com/maps/search/?api=1&amp;query=Victoria+381+Ovalle+Chile" target="_blank" rel="noopener noreferrer">
+                Abrir en Google Maps <span class="btn__arrow">→</span>
+              </a>
+            </div>
+
+            <div class="legal-strip legal-strip--on-dark">
+              <p class="legal-strip__summary">COMERCIALIZADORA Y SERVICIOS UNO LIMITADA · RUT 77.123.870-k · Nombre de fantasía TVRED</p>
+              <button type="button" class="legal-strip__btn legal-strip__btn--on-dark" id="companyInfoBtn" aria-haspopup="dialog" aria-controls="companyInfoDialog">
+                <span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span>
+                Datos legales y Mercado Público
+              </button>
+            </div>
+          </div>
+
+          <div class="contact-footer__map-panel">
+            <div class="contact-footer__map-chrome">
+              <div class="contact-footer__map-header">
+                <span class="contact-footer__map-eyebrow">Ubicación</span>
+                <strong>Casa matriz · Ovalle</strong>
+                <span class="contact-footer__map-meta">Victoria 381 Of. 203</span>
+              </div>
+              <div id="hqMap" class="contact-footer__map hq-map" role="application" aria-label="Mapa interactivo de la casa matriz en Ovalle"></div>
+            </div>
+          </div>
         </div>
 
-        <div class="contact-actions reveal">
-          <a href="mailto:comercial@unolimitada.cl" class="btn btn--sm">
-            <span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span>
-            comercial@unolimitada.cl
-          </a>
-          <a href="tel:+56989028179" class="btn btn--ghost btn--sm">
-            <span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span>
-            +56 9 8902 8179
-          </a>
+        <div class="contact-footer__nav reveal">
+          <div class="contact-footer__brand">
+            <img src="logos/cablecolor-logo-horizontal-alt.png" alt="Cable Color" class="brand-logo brand-logo--cablecolor-md" width="800" height="84" loading="lazy" decoding="async">
+            <p>Conectividad y TV corporativa · Coquimbo y Magallanes</p>
+          </div>
+          <nav class="contact-footer__col" aria-label="Navegación del dossier">
+            <h4>Navegación</h4>
+            <ul>
+              <li><a href="#quienes">Quiénes somos</a></li>
+              <li><a href="#experiencia">Experiencia</a></li>
+              <li><a href="#solucion">Solución</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </nav>
+          <nav class="contact-footer__col" aria-label="Marcas">
+            <h4>Marcas</h4>
+            <ul>
+              <li><a href="#solucion">CableColor TV</a></li>
+              <li><a href="#solucion">FibraCorp</a></li>
+              <li><a href="#quienes">TV Red · Fibra Educa</a></li>
+            </ul>
+          </nav>
+          <nav class="contact-footer__col" aria-label="Recursos">
+            <h4>Recursos</h4>
+            <ul>
+              <li><a href="Ficha_PDF_20260606_10_29.pdf" target="_blank" rel="noopener">Ficha Mercado Público</a></li>
+              <li><a href="deck.html">Versión presentación</a></li>
+              <li><a href="mailto:comercial@unolimitada.cl">comercial@unolimitada.cl</a></li>
+            </ul>
+          </nav>
         </div>
 
-        <div class="legal-strip u-mt reveal">
-          <p class="legal-strip__summary">COMERCIALIZADORA Y SERVICIOS UNO LIMITADA · RUT 77.123.870-k · Nombre de fantasía TVRED · Victoria 381 Of. 203, Ovalle, Región de Coquimbo</p>
-          <button type="button" class="legal-strip__btn" id="companyInfoBtn" aria-haspopup="dialog" aria-controls="companyInfoDialog">
-            <span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span>
-            Datos legales y Mercado Público
-          </button>
+        <div class="contact-footer__bottom reveal">
+          <span>© 2026 Comercializadora y Servicios Uno Ltda. · Documento confidencial · MP 5/5 HÁBIL</span>
+          <span>Ovalle, Región de Coquimbo · Chile</span>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="site-footer">
-    <div class="site-footer__inner">
-      <div class="site-footer__brand">
-        <img src="logos/cablecolor-logo-horizontal-alt.png" alt="Cable Color" class="brand-logo brand-logo--cablecolor-md" width="800" height="84" loading="lazy" decoding="async">
-        <p>Conectividad y TV corporativa · Coquimbo y Magallanes</p>
+  <dialog class="company-dialog" id="mpInfoDialog" aria-labelledby="mpInfoTitle">
+    <div class="company-dialog__panel">
+      <header class="company-dialog__header">
+        <div class="company-dialog__intro">
+          <p class="company-dialog__eyebrow">Mercado Público · Ficha oficial</p>
+          <h2 class="company-dialog__title" id="mpInfoTitle">Registro de Proveedores del Estado</h2>
+          <p class="company-dialog__subtitle">Comercializadora y Servicios Uno Limitada · RUT 77.123.870-k</p>
+        </div>
+        <button type="button" class="company-dialog__close" data-dialog-close aria-label="Cerrar ventana">
+          <span class="icon icon--sm"><svg><use href="#i-x"/></svg></span>
+        </button>
+      </header>
+
+      <div class="company-dialog__body">
+        <div class="mp-ficha mp-ficha--dialog" aria-label="Datos oficiales de la ficha Mercado Público">
+          <div class="mp-ficha__header">
+            <span class="mp-ficha__seal">
+              <span class="icon icon--sm"><svg><use href="#i-check"/></svg></span>
+              Proveedor HÁBIL
+            </span>
+            <span class="mp-ficha__source">Ficha Mercado Público · 6 jun 2026</span>
+          </div>
+          <div class="mp-ficha__panel">
+            <div class="mp-ficha__score" aria-label="Comportamiento base 5 de 5">
+              <span class="mp-ficha__score-ring" aria-hidden="true">
+                <span class="mp-ficha__score-value">5/5</span>
+              </span>
+              <span class="mp-ficha__score-label">Comportamiento base</span>
+              <span class="mp-ficha__score-note">Sin sanciones · 24 meses</span>
+            </div>
+            <div class="mp-ficha__metrics">
+              <div class="mp-ficha__metric">
+                <span class="mp-ficha__metric-label">Ventas MP</span>
+                <strong class="mp-ficha__metric-value">$62.456.092</strong>
+                <span class="mp-ficha__metric-note">Dic 2025 – dic 2026</span>
+              </div>
+              <div class="mp-ficha__metric">
+                <span class="mp-ficha__metric-label">Habilidad</span>
+                <strong class="mp-ficha__metric-value">HÁBIL</strong>
+                <span class="mp-ficha__metric-note">Registro de Proveedores</span>
+              </div>
+              <div class="mp-ficha__metric">
+                <span class="mp-ficha__metric-label">Acreditación</span>
+                <strong class="mp-ficha__metric-value">01-02-2027</strong>
+                <span class="mp-ficha__metric-note">Vigencia acreditado</span>
+              </div>
+            </div>
+          </div>
+          <dl class="mp-ficha__legal">
+            <div class="mp-ficha__legal-item">
+              <dt>RUT</dt>
+              <dd>77.123.870-k</dd>
+            </div>
+            <div class="mp-ficha__legal-item">
+              <dt>Domicilio legal</dt>
+              <dd>Victoria 381 Of. 203, Ovalle</dd>
+            </div>
+            <div class="mp-ficha__legal-item">
+              <dt>Representante legal</dt>
+              <dd>Rodrigo Alejandro Jara Ovalle</dd>
+            </div>
+          </dl>
+        </div>
       </div>
-      <div>
-        <h4>Navegación</h4>
-        <ul>
-          <li><a href="#quienes">Quiénes somos</a></li>
-          <li><a href="#experiencia">Experiencia</a></li>
-          <li><a href="#solucion">Solución</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Marcas</h4>
-        <ul>
-          <li><a href="#solucion">CableColor TV</a></li>
-          <li><a href="#solucion">FibraCorp</a></li>
-          <li><a href="#quienes">TV Red · Fibra Educa</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Formato</h4>
-        <ul>
-          <li><a href="Ficha_PDF_20260606_10_29.pdf" target="_blank" rel="noopener">Ficha Mercado Público</a></li>
-          <li><a href="deck.html">Versión presentación (12 láminas)</a></li>
-          <li><a href="mailto:comercial@unolimitada.cl">comercial@unolimitada.cl</a></li>
-        </ul>
-      </div>
+
+      <footer class="company-dialog__footer">
+        <a href="Ficha_PDF_20260606_10_29.pdf" class="btn btn--sm btn--ghost" target="_blank" rel="noopener">
+          Ver ficha PDF <span class="btn__arrow">→</span>
+        </a>
+        <button type="button" class="btn btn--sm" data-dialog-close>Cerrar</button>
+      </footer>
     </div>
-    <div class="site-footer__bottom">
-      <span>© 2026 Comercializadora y Servicios Uno Ltda. · Documento confidencial · MP 5/5 HÁBIL</span>
-      <span>Ovalle, Región de Coquimbo · Chile</span>
-    </div>
-  </footer>
+  </dialog>
 
   <dialog class="company-dialog" id="companyInfoDialog" aria-labelledby="companyInfoTitle">
     <div class="company-dialog__panel">

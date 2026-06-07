@@ -1237,6 +1237,31 @@ button { font-family: inherit; cursor: pointer; }
   transform: scale(0.98);
 }
 
+.legal-strip--on-dark {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.legal-strip--on-dark .legal-strip__summary {
+  color: rgba(255, 255, 255, 0.52);
+}
+
+.legal-strip__btn--on-dark {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.legal-strip__btn--on-dark .icon {
+  color: var(--white);
+}
+
+.legal-strip__btn--on-dark:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
 .company-dialog {
   width: min(34rem, calc(100vw - 2rem));
   max-height: calc(100vh - 2rem);
@@ -1595,6 +1620,20 @@ button { font-family: inherit; cursor: pointer; }
   border-color: var(--navy);
   color: var(--navy);
   box-shadow: 0 6px 20px rgba(11, 20, 64, 0.1);
+}
+
+.btn--light {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  box-shadow: none;
+}
+
+.btn--light:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.38);
+  color: var(--white);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
 }
 
 .btn--navy {
