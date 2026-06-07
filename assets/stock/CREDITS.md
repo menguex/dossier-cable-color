@@ -6,7 +6,8 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 |---------|----------------|--------|
 | patagonia.jpg | Hero (fondo) | Unsplash |
 | data-center.jpg | Quiénes somos · infraestructura | Unsplash |
-| hospital-modern.jpg | Ovalle (pendiente foto real) | Unsplash |
+| hospital-modern.jpg | Reserva | Unsplash |
+| ovalle.png | Hospital Provincial de Ovalle | Cliente · carpeta `fotos/` |
 | salamanca.jpg | Hospital de Salamanca | Cliente · carpeta `fotos/` |
 | illapel.png | Hospital / CESFAM Illapel | Cliente · carpeta `fotos/` |
 | magallanes.png | Hospital Clínico de Magallanes | Cliente · carpeta `fotos/` |
@@ -18,4 +19,4 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 | hospital-digital-care.jpg | CableColor TV · atención clínica digital | Unsplash |
 | hospital-modern-care.jpg | Reserva | Unsplash |
 
-**Prioridad:** reemplazar por fotografía real del Hospital Provincial de Ovalle (único recinto que aún usa stock).
+**Prioridad:** todas las fotos de hospitales del dossier usan imágenes reales del cliente.
