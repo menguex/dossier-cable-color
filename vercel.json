@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "dossier-cable-color",
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false
+}

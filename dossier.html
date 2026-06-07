@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cable Color · FibraCorp · Dossier Corporativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   TOKENS
+───────────────────────────────────────────── */
+:root {
+  --navy:      #152982;
+  --navy-dim:  #0d1a52;
+  --navy-glow: rgba(21,41,130,.35);
+  --red:       #CC0000;
+  --red-dim:   #990000;
+  --bg:        #06090F;
+  --bg-card:   #0C1020;
+  --bg-panel:  #111827;
+  --line:      rgba(255,255,255,.07);
+  --white:     #F2F5FB;
+  --muted:     #7A86A1;
+  --head: 'Barlow Condensed', sans-serif;
+  --body: 'Plus Jakarta Sans', sans-serif;
+  --mono: 'Space Mono', monospace;
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out:  cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ─────────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────────── */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 40px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+.tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--red);
+  border: 1px solid rgba(204,0,0,.35);
+  padding: .3rem .75rem;
+  border-radius: 2px;
+  margin-bottom: 1.5rem;
+}
+.reveal { opacity: 0; transform: translateY(48px); }
+
+/* ─────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 20px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .4s var(--ease-out), padding .4s var(--ease-out);
+}
+nav.scrolled {
+  background: rgba(6,9,15,.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 40px;
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo img { height: 36px; }
+.nav-links {
+  display: flex; gap: 2rem;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+.nav-links a:hover { color: var(--white); transition: color .2s; }
+.nav-cta {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--body);
+  font-size: .82rem;
+  font-weight: 600;
+  padding: .5rem 1.25rem;
+  border-radius: 3px;
+  transition: background .2s;
+}
+.nav-cta:hover { background: var(--red-dim); }
+
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 40%;
+  transform: scale(1.06);
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(6,9,15,.95) 0%,
+    rgba(6,9,15,.80) 50%,
+    rgba(21,41,130,.15) 100%
+  );
+}
+.hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  opacity: .5;
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 1;
+  padding: 140px 40px 100px;
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: .75rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+}
+.live-dot {
+  width: 8px; height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.5); }
+}
+.hero-eyebrow span {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero-title {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(4rem, 10vw, 9.5rem);
+  line-height: .92;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line span { display: block; transform: translateY(110%); }
+.hero-title .accent { color: var(--red); }
+.hero-subtitle {
+  max-width: 580px;
+  font-size: 1.1rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+}
+.hero-subtitle strong { color: var(--white); }
+.hero-actions { display: flex; gap: 1rem; opacity: 0; }
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: .9rem;
+  padding: .85rem 2rem;
+  border: none; cursor: pointer;
+  border-radius: 3px;
+  transition: background .2s, transform .15s var(--ease-snap);
+}
+.btn-primary:hover { background: #a80000; }
+.btn-primary:active { transform: scale(.97); }
+.btn-ghost {
+  background: transparent;
+  color: var(--white);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: .9rem;
+  padding: .85rem 2rem;
+  border: 1px solid rgba(255,255,255,.2);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.05); }
+
+/* Hero stats strip */
+.hero-stats {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(6,9,15,.75);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 2rem 2.5rem;
+  border-right: 1px solid var(--line);
+  opacity: 0;
+}
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--white);
+  letter-spacing: -.02em;
+}
+.stat-num .unit {
+  font-size: 1.8rem;
+  color: var(--red);
+  margin-left: .1em;
+}
+.stat-label {
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: .4rem;
+}
+
+/* ─────────────────────────────────────────────
+   SECTION COMMON
+───────────────────────────────────────────── */
+section { padding: 120px 0; }
+.section-head { margin-bottom: 5rem; }
+.section-title {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 1.0;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+.section-title .accent { color: var(--red); }
+.section-body {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 560px;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────────
+   HISTORIA — 30 AÑOS
+───────────────────────────────────────────── */
+#historia {
+  background: var(--bg-card);
+  position: relative; overflow: hidden;
+}
+.historia-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1545049489-de394f04d4d5?w=1920&q=80&auto=format&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: .08;
+}
+.historia-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.historia-big {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(8rem, 18vw, 18rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,.08);
+  user-select: none;
+  position: absolute;
+  left: -20px; top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+}
+.historia-text {}
+.historia-copy {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+.historia-copy strong { color: var(--white); font-weight: 600; }
+.historia-milestones { margin-top: 3rem; }
+.milestone {
+  display: flex; gap: 1.5rem; align-items: flex-start;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.milestone:last-child { border-bottom: none; }
+.milestone-year {
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--red);
+  width: 60px; flex-shrink: 0;
+  padding-top: .1rem;
+}
+.milestone-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.milestone-desc strong { color: var(--white); }
+
+/* Right column — big number */
+.historia-number-col {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 3rem;
+}
+.big-number-block { text-align: right; }
+.big-number-block .num {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(5rem, 10vw, 9rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--white);
+}
+.big-number-block .num .plus { color: var(--red); }
+.big-number-block .desc {
+  font-size: .85rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-top: .5rem;
+}
+
+/* ─────────────────────────────────────────────
+   PROBLEMA
+───────────────────────────────────────────── */
+#problema { background: var(--bg); }
+.problema-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  border: 1px solid var(--line);
+  margin-top: 4rem;
+}
+.problema-item {
+  background: var(--bg-card);
+  padding: 2.5rem;
+  border: 1px solid var(--line);
+  transition: background .3s;
+  cursor: default;
+}
+.problema-item:hover { background: #111827; }
+.problema-num {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--red);
+  margin-bottom: 1rem;
+  letter-spacing: .1em;
+}
+.problema-title {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  margin-bottom: .75rem;
+  color: var(--white);
+}
+.problema-desc {
+  font-size: .88rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.problema-arrow {
+  margin-top: 1.25rem;
+  font-size: .82rem;
+  color: var(--red);
+  font-family: var(--mono);
+  display: flex; align-items: center; gap: .5rem;
+}
+.problema-arrow::after { content: '→'; font-size: 1rem; }
+
+/* ─────────────────────────────────────────────
+   SOLUCIÓN
+───────────────────────────────────────────── */
+#solucion {
+  background: var(--bg-card);
+  position: relative;
+}
+.solucion-products {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  margin-top: 5rem;
+}
+.product-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform .25s var(--ease-snap), border-color .25s;
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(21,41,130,.6);
+}
+.product-img {
+  width: 100%; height: 220px;
+  object-fit: cover;
+  background: var(--navy-dim);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.product-img img { width: 100%; height: 100%; object-fit: cover; }
+.product-img-placeholder {
+  width: 100%; height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #0a0f1e 0%, #152982 100%);
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: 3.5rem;
+  letter-spacing: -.02em;
+  color: rgba(255,255,255,.15);
+  text-transform: uppercase;
+}
+.product-body { padding: 2rem; }
+.product-badge {
+  display: inline-block;
+  background: rgba(204,0,0,.15);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .25rem .7rem;
+  border-radius: 2px;
+  margin-bottom: 1rem;
+}
+.product-name {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: -.01em;
+  margin-bottom: .75rem;
+}
+.product-desc {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+.product-features {
+  display: flex; flex-direction: column; gap: .6rem;
+}
+.product-feature {
+  display: flex; align-items: center; gap: .75rem;
+  font-size: .85rem; color: var(--muted);
+}
+.product-feature::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+/* Integration banner */
+.integration-banner {
+  margin-top: 4rem;
+  background: linear-gradient(135deg, var(--navy-dim) 0%, rgba(204,0,0,.15) 100%);
+  border: 1px solid rgba(21,41,130,.4);
+  border-radius: 4px;
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; gap: 3rem;
+}
+.integration-icon {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: 3rem;
+  color: rgba(255,255,255,.15);
+  white-space: nowrap;
+}
+.integration-text h3 {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.integration-text p {
+  font-size: .9rem;
+  color: var(--muted);
+  max-width: 540px;
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────────
+   CASOS DE ÉXITO
+───────────────────────────────────────────── */
+#casos { background: var(--bg); }
+.casos-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+  align-items: center; margin-bottom: 5rem;
+}
+.casos-quote {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.35;
+  color: var(--white);
+}
+.casos-quote em { font-style: normal; color: var(--red); }
+.casos-detail {
+  font-size: .9rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.casos-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+.caso-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .25s, border-color .25s, transform .25s var(--ease-snap);
+  cursor: default;
+}
+.caso-card:hover {
+  background: #111827;
+  border-color: rgba(21,41,130,.5);
+  transform: translateY(-3px);
+  z-index: 1;
+}
+.caso-card.featured {
+  grid-row: span 2;
+  background: linear-gradient(160deg, #0d1422 0%, #0d1832 100%);
+  border-color: rgba(21,41,130,.3);
+}
+.caso-card-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=800&q=60&auto=format&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: .06; transition: opacity .3s;
+}
+.caso-card.featured .caso-card-bg { opacity: .1; }
+.caso-card:hover .caso-card-bg { opacity: .12; }
+.caso-card-inner { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; }
+.caso-stars {
+  display: flex; gap: 3px; margin-bottom: 1.5rem;
+}
+.caso-stars span {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+}
+.caso-icon {
+  font-size: 2rem; margin-bottom: 1rem;
+  opacity: .6;
+}
+.caso-name {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: .75rem;
+}
+.caso-region {
+  font-family: var(--mono);
+  font-size: .7rem;
+  color: var(--red);
+  letter-spacing: .1em;
+  margin-bottom: 1rem;
+}
+.caso-desc {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  flex: 1;
+}
+.caso-stats {
+  display: flex; gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.caso-stat-val {
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: var(--white);
+  line-height: 1;
+}
+.caso-stat-val .accent { color: var(--red); }
+.caso-stat-label {
+  font-size: .72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-top: .25rem;
+}
+.caso-badge-military {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(204,0,0,.12);
+  border: 1px solid rgba(204,0,0,.3);
+  color: var(--red);
+  font-family: var(--mono);
+  font-size: .65rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: .3rem .75rem;
+  border-radius: 2px;
+  margin-top: 1.5rem;
+}
+.caso-badge-military::before { content: '★'; }
+
+/* ─────────────────────────────────────────────
+   MAPA COBERTURA
+───────────────────────────────────────────── */
+#cobertura {
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.cobertura-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+}
+.cobertura-text {}
+.cobertura-cities {
+  margin-top: 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+}
+.region-block {}
+.region-name {
+  font-family: var(--mono);
+  font-size: .72rem;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid rgba(204,0,0,.2);
+}
+.city-item {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: .85rem;
+  color: var(--muted);
+  padding: .35rem 0;
+}
+.city-dot {
+  width: 5px; height: 5px;
+  background: var(--navy);
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--navy);
+}
+.cobertura-map {
+  display: flex; justify-content: center; align-items: center;
+  position: relative;
+}
+/* Chile SVG map */
+.chile-map-wrap {
+  position: relative; width: 280px;
+}
+.chile-map-wrap svg { width: 100%; }
+.map-point {
+  cursor: pointer;
+}
+.map-point circle {
+  animation: map-pulse 3s ease-in-out infinite;
+}
+@keyframes map-pulse {
+  0%, 100% { r: 6; opacity: 1; }
+  50% { r: 10; opacity: .5; }
+}
+.map-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+/* ─────────────────────────────────────────────
+   MÉTRICAS
+───────────────────────────────────────────── */
+#metricas {
+  background: var(--bg);
+  position: relative;
+}
+.metricas-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(21,41,130,.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.metricas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 5rem;
+  border: 1px solid var(--line);
+}
+.metric-item {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.metric-val {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(3rem, 5vw, 5rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--white);
+}
+.metric-val .acc { color: var(--red); }
+.metric-label {
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-top: .75rem;
+  line-height: 1.5;
+}
+.metric-source {
+  font-family: var(--mono);
+  font-size: .62rem;
+  color: rgba(122,134,161,.4);
+  margin-top: .5rem;
+  letter-spacing: .06em;
+}
+
+/* ─────────────────────────────────────────────
+   DIFERENCIADORES
+───────────────────────────────────────────── */
+#diferenciadores { background: var(--bg-card); }
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 4rem;
+  font-size: .88rem;
+}
+.comp-table th {
+  padding: 1.25rem 1.75rem;
+  text-align: left;
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: .95rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-bottom: 2px solid var(--line);
+}
+.comp-table th.our-col {
+  color: var(--white);
+  background: rgba(21,41,130,.15);
+  border-bottom-color: var(--navy);
+}
+.comp-table th.other-col { color: var(--muted); }
+.comp-table td {
+  padding: 1.1rem 1.75rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  vertical-align: middle;
+}
+.comp-table td.our-col {
+  background: rgba(21,41,130,.06);
+  color: var(--white);
+  font-weight: 500;
+}
+.comp-table tr:hover td { background: rgba(255,255,255,.025); }
+.comp-table tr:hover td.our-col { background: rgba(21,41,130,.1); }
+.check { color: #22c55e; font-size: 1.1rem; }
+.cross { color: #ef4444; font-size: 1rem; }
+
+/* Differentiator cards */
+.diff-cards {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 4rem;
+}
+.diff-card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1.75rem;
+  transition: border-color .25s, transform .25s var(--ease-snap);
+}
+.diff-card:hover {
+  border-color: rgba(21,41,130,.5);
+  transform: translateY(-4px);
+}
+.diff-num {
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--red);
+  letter-spacing: .1em;
+  margin-bottom: 1rem;
+}
+.diff-title {
+  font-family: var(--head);
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+}
+.diff-desc { font-size: .82rem; color: var(--muted); line-height: 1.7; }
+
+/* ─────────────────────────────────────────────
+   CONTACTO
+───────────────────────────────────────────── */
+#contacto {
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+.contacto-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1920&q=80&auto=format&fit=crop');
+  background-size: cover; background-position: center;
+  opacity: .05;
+}
+.contacto-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;
+}
+.contacto-cta-big {
+  font-family: var(--head);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+}
+.contacto-cta-big .red { color: var(--red); }
+.contacto-sub {
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 1.5rem; margin-bottom: 2.5rem;
+}
+.contact-persons { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+.contact-person {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 1.5rem;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.person-avatar {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--navy-dim), var(--navy));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--head);
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.person-info {}
+.person-name { font-weight: 600; font-size: .9rem; margin-bottom: .2rem; }
+.person-role {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: .4rem;
+}
+.person-email {
+  font-size: .82rem;
+  color: var(--muted);
+}
+/* Form */
+.contacto-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: .4rem; }
+.form-label {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+.form-input, .form-select, .form-textarea {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--white);
+  font-family: var(--body);
+  font-size: .9rem;
+  padding: .75rem 1rem;
+  border-radius: 3px;
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--navy);
+  background: rgba(21,41,130,.08);
+}
+.form-select { appearance: none; cursor: pointer; }
+.form-textarea { min-height: 110px; resize: vertical; }
+.form-submit {
+  background: var(--red);
+  color: #fff;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: .95rem;
+  padding: 1rem 2rem;
+  border: none; cursor: pointer;
+  border-radius: 3px;
+  width: 100%;
+  margin-top: .5rem;
+  transition: background .2s, transform .15s var(--ease-snap);
+}
+.form-submit:hover { background: #a80000; }
+.form-submit:active { transform: scale(.98); }
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+footer {
+  background: var(--bg-card);
+  border-top: 1px solid var(--line);
+  padding: 3rem 0;
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1.5rem;
+}
+.footer-logo img { height: 28px; opacity: .7; }
+.footer-meta {
+  font-family: var(--mono);
+  font-size: .68rem;
+  color: rgba(122,134,161,.45);
+  text-align: center;
+}
+.footer-badges { display: flex; align-items: center; gap: 1rem; }
+.footer-badge {
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line);
+  padding: .35rem .85rem;
+  font-family: var(--mono);
+  font-size: .65rem;
+  color: var(--muted);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.footer-badge.green { border-color: rgba(34,197,94,.3); color: #22c55e; }
+
+/* ─────────────────────────────────────────────
+   SCROLL PROGRESS BAR
+───────────────────────────────────────────── */
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px;
+  background: var(--red);
+  z-index: 200;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform .1s linear;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .historia-inner,
+  .cobertura-inner,
+  .contacto-inner,
+  .casos-intro { grid-template-columns: 1fr; gap: 3rem; }
+  .casos-grid { grid-template-columns: 1fr 1fr; }
+  .caso-card.featured { grid-column: span 2; grid-row: span 1; }
+  .diff-cards { grid-template-columns: repeat(2, 1fr); }
+  .metricas-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .solucion-products { grid-template-columns: 1fr; }
+  .casos-grid { grid-template-columns: 1fr; }
+  .caso-card.featured { grid-column: auto; }
+  .comp-table { font-size: .78rem; }
+  .comp-table th, .comp-table td { padding: .9rem 1rem; }
+  .diff-cards { grid-template-columns: 1fr; }
+  .metricas-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .problema-grid { grid-template-columns: 1fr; }
+  section { padding: 80px 0; }
+  .form-row { grid-template-columns: 1fr; }
+  .cobertura-cities { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">
+    <img src="logos/cablecolor-logo-horizontal.png" alt="Cable Color">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#casos">Casos de Éxito</a></li>
+    <li><a href="#solucion">Solución</a></li>
+    <li><a href="#cobertura">Cobertura</a></li>
+    <li><a href="#diferenciadores">Por Qué Nosotros</a></li>
+  </ul>
+  <a class="nav-cta" href="#contacto">Solicitar Visita Técnica</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-noise"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" id="heroEyebrow">
+      <div class="live-dot"></div>
+      <span>Dossier Corporativo · 2026 · Sector Minero</span>
+    </div>
+
+    <h1 class="hero-title" id="heroTitle">
+      <span class="line"><span>Conectividad</span></span>
+      <span class="line"><span>que <em class="accent">No</em></span></span>
+      <span class="line"><span>Se Detiene</span></span>
+    </h1>
+
+    <p class="hero-subtitle" id="heroSubtitle">
+      <strong>30 años conectando Chile.</strong> Infraestructura propia en Coquimbo y Magallanes.
+      El mismo estándar que usamos en hospitales de alta complejidad,
+      ahora al servicio de su campamento minero.
+    </p>
+
+    <div class="hero-actions" id="heroActions">
+      <a class="btn-primary" href="#contacto">Solicitar visita técnica</a>
+      <a class="btn-ghost" href="#casos">Ver casos de éxito</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item" data-counter="30" data-suffix="años">
+      <div class="stat-num"><span class="counter-val">30</span><span class="unit">+</span></div>
+      <div class="stat-label">Años de operación continua</div>
+    </div>
+    <div class="stat-item" data-counter="180" data-suffix="+">
+      <div class="stat-num"><span class="counter-val">180</span><span class="unit">+</span></div>
+      <div class="stat-label">Puntos TV instalados · Hospital Ovalle</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5<span class="unit">/5</span></div>
+      <div class="stat-label">Score Mercado Público · sin sanciones</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">9<span class="unit">+</span></div>
+      <div class="stat-label">Ciudades con infraestructura propia</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ HISTORIA ═══ -->
+<section id="historia">
+  <div class="historia-bg"></div>
+  <div class="container">
+    <div class="historia-inner">
+      <div class="historia-text">
+        <div class="tag reveal">Nuestra Historia</div>
+        <h2 class="section-title reveal">30 Años<br>que No se<br><span class="accent">Improvisan</span></h2>
+        <div class="historia-milestones">
+          <div class="milestone reveal">
+            <div class="milestone-year">1994–</div>
+            <div class="milestone-desc"><strong>Cable Color y TV Red:</strong> fundamos operaciones en Ovalle y Punta Arenas cuando nadie más quería llegar.</div>
+          </div>
+          <div class="milestone reveal">
+            <div class="milestone-year">2010–</div>
+            <div class="milestone-desc"><strong>Sector salud:</strong> primeras adjudicaciones hospitalarias. Telecomunicaciones para hospitales de Coquimbo — Salamanca e Illapel.</div>
+          </div>
+          <div class="milestone reveal">
+            <div class="milestone-year">2018–</div>
+            <div class="milestone-desc"><strong>Hospital Naval:</strong> el sistema de salud de las Fuerzas Armadas confía en nuestra infraestructura. Estándar militar de disponibilidad.</div>
+          </div>
+          <div class="milestone reveal">
+            <div class="milestone-year">2020–</div>
+            <div class="milestone-desc"><strong>FibraCorp:</strong> lanzamos conectividad empresarial sobre fibra óptica. Hospital de Magallanes adjudicado.</div>
+          </div>
+          <div class="milestone reveal">
+            <div class="milestone-year">2026→</div>
+            <div class="milestone-desc"><strong>Minería:</strong> llevamos la misma arquitectura de misión crítica a los campamentos mineros de Chile.</div>
+          </div>
+        </div>
+      </div>
+      <div class="historia-number-col">
+        <div class="big-number-block reveal">
+          <div class="num"><span class="plus">+</span>180</div>
+          <div class="desc">Puntos TV activos · Hospital Ovalle</div>
+        </div>
+        <div class="big-number-block reveal">
+          <div class="num">5</div>
+          <div class="desc">Hospitales · incluyendo Hospital Naval FA</div>
+        </div>
+        <div class="big-number-block reveal">
+          <div class="num">2</div>
+          <div class="desc">Regiones con infraestructura propia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PROBLEMA ═══ -->
+<section id="problema">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag reveal">El Problema</div>
+      <h2 class="section-title reveal">Lo que le Cuesta<br>a la Minería una<br><span class="accent">Conectividad Mediocre</span></h2>
+      <p class="section-body reveal">En los campamentos mineros de Chile —altiplano, desierto, Patagonia— la conectividad no es un lujo. Es infraestructura operacional crítica. La mala conectividad tiene consecuencias reales y mensurables.</p>
+    </div>
+    <div class="problema-grid">
+      <div class="problema-item reveal">
+        <div class="problema-num">01 / Operaciones</div>
+        <div class="problema-title">Conectividad Inestable</div>
+        <div class="problema-desc">Retrasos en comunicaciones de seguridad, emergencias y gestión de operaciones en tiempo real. Cada minuto de inactividad tiene costo directo.</div>
+        <div class="problema-arrow">Riesgo operacional alto</div>
+      </div>
+      <div class="problema-item reveal">
+        <div class="problema-num">02 / RRHH</div>
+        <div class="problema-title">Retención de Talento</div>
+        <div class="problema-desc">Trabajadores en campamento esperan entretenimiento y comunicación de calidad. Sin ello: mayor rotación, costos de reemplazo y baja productividad.</div>
+        <div class="problema-arrow">Impacto directo en costos</div>
+      </div>
+      <div class="problema-item reveal">
+        <div class="problema-num">03 / Tecnología</div>
+        <div class="problema-title">Sin IPTV Administrable</div>
+        <div class="problema-desc">Imposibilidad de distribuir contenidos institucionales, protocolos de seguridad o información operacional a través de las pantallas del campamento.</div>
+        <div class="problema-arrow">Oportunidad desaprovechada</div>
+      </div>
+      <div class="problema-item reveal">
+        <div class="problema-num">04 / Contratos</div>
+        <div class="problema-title">Proveedores sin Presencia</div>
+        <div class="problema-desc">Empresas metropolitanas que "visitan" la región: tiempos de respuesta de días, subcontratistas sin conocimiento del terreno, SLAs imposibles de cumplir.</div>
+        <div class="problema-arrow">Riesgo contractual</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ SOLUCIÓN ═══ -->
+<section id="solucion">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag reveal">La Solución</div>
+      <h2 class="section-title reveal">Un Ecosistema<br>Completo para su<br><span class="accent">Campamento</span></h2>
+      <p class="section-body reveal">CableColor TV + FibraCorp es la única solución integrada del mercado con infraestructura propia, plataforma IPTV propia y soporte técnico en terreno en las regiones mineras más críticas de Chile.</p>
+    </div>
+
+    <div class="solucion-products">
+      <div class="product-card reveal">
+        <div class="product-img">
+          <img src="WhatsApp Image 2026-06-06 at 11.15.50 (1).jpeg" alt="CableColor TV plataforma IPTV" style="object-position: center top;">
+        </div>
+        <div class="product-body">
+          <span class="product-badge">Plataforma IPTV</span>
+          <div class="product-name">CableColor TV</div>
+          <p class="product-desc">No es televisión por cable convencional. Es una plataforma administrada, escalable y diseñada para misión crítica. Convierte cada pantalla del campamento en un punto de información, entretenimiento e identidad corporativa.</p>
+          <ul class="product-features">
+            <li class="product-feature">Interfaz moderna · acceso multiplataforma</li>
+            <li class="product-feature">Administración centralizada y remota</li>
+            <li class="product-feature">Canal institucional propio para la minera</li>
+            <li class="product-feature">Alta disponibilidad · sin interrupciones</li>
+            <li class="product-feature">Escalable: 50 → 500+ habitaciones</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="product-card reveal">
+        <div class="product-img-placeholder">FIBRACORP</div>
+        <div class="product-body">
+          <span class="product-badge">Conectividad Empresarial</span>
+          <div class="product-name">FibraCorp</div>
+          <p class="product-desc">Fibra óptica de alta velocidad con arquitectura diseñada para entornos corporativos de misión crítica. Sin la inestabilidad del satélite. Sin la dependencia de subcontratistas.</p>
+          <ul class="product-features">
+            <li class="product-feature">Internet de alta velocidad sobre fibra propia</li>
+            <li class="product-feature">Soporta operaciones, entretenimiento y seguridad simultáneos</li>
+            <li class="product-feature">Latencia baja para aplicaciones de tiempo real</li>
+            <li class="product-feature">Integrable con sistemas IOT y gestión minera</li>
+            <li class="product-feature">IP estática disponible · SLA garantizado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="integration-banner reveal">
+      <div class="integration-icon">TV + FIBRA</div>
+      <div class="integration-text">
+        <h3>Convergencia Tecnológica Total</h3>
+        <p>Un solo proveedor. Una sola red. Una sola plataforma. Un solo punto de soporte. La integración de CableColor TV con FibraCorp elimina fricciones entre sistemas y entrega un SLA unificado con responsabilidad contractual indivisa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CASOS DE ÉXITO ═══ -->
+<section id="casos">
+  <div class="container">
+    <div class="casos-intro">
+      <div>
+        <div class="tag reveal">Casos de Éxito</div>
+        <h2 class="section-title reveal">Si Funciona en<br>un Hospital,<br><span class="accent">Funciona en su<br>Campamento</span></h2>
+      </div>
+      <div>
+        <p class="casos-quote reveal">
+          <em>"Ya implementamos soluciones similares en los entornos más críticos del país. Un hospital de alta complejidad tiene más puntos de falla que un campamento minero."</em>
+        </p>
+        <p class="casos-detail reveal" style="margin-top:1.5rem;">Cinco instalaciones activas con soporte técnico permanente. Licitaciones adjudicadas. Mantenimiento correctivo sin interrupciones operacionales.</p>
+      </div>
+    </div>
+
+    <div class="casos-grid">
+      <!-- Featured card -->
+      <div class="caso-card featured reveal">
+        <div class="caso-card-bg"></div>
+        <div class="caso-card-inner">
+          <div class="caso-stars"><span></span><span></span><span></span></div>
+          <div class="caso-region">Región de Coquimbo · Licitación Pública</div>
+          <div class="caso-name">Hospital Provincial de Ovalle</div>
+          <p class="caso-desc">Instalación completa de plataforma IPTV y telecomunicaciones en un hospital de alta complejidad. Múltiples edificios. Múltiples áreas clínicas. Soporte técnico permanente 24/7 desde el día 1.</p>
+          <div class="caso-stats">
+            <div>
+              <div class="caso-stat-val">+180<span class="accent"> pts</span></div>
+              <div class="caso-stat-label">Puntos TV activos</div>
+            </div>
+            <div>
+              <div class="caso-stat-val">24<span class="accent">/7</span></div>
+              <div class="caso-stat-label">Soporte activo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Small cards -->
+      <div class="caso-card reveal">
+        <div class="caso-card-inner">
+          <div class="caso-region">Coquimbo</div>
+          <div class="caso-name">Hospital de Salamanca</div>
+          <p class="caso-desc">Telecomunicaciones y conectividad estable para dependencias asistenciales. Continuidad operacional garantizada.</p>
+        </div>
+      </div>
+
+      <div class="caso-card reveal">
+        <div class="caso-card-inner">
+          <div class="caso-region">Coquimbo</div>
+          <div class="caso-name">Hospital de Illapel</div>
+          <p class="caso-desc">Conectividad estable y soporte especializado. Licitación adjudicada vía Mercado Público.</p>
+        </div>
+      </div>
+
+      <div class="caso-card reveal">
+        <div class="caso-card-inner">
+          <div class="caso-region">Magallanes · Adjudicación Licitatoria</div>
+          <div class="caso-name">Hospital Clínico de Magallanes</div>
+          <p class="caso-desc">Provisión de telecomunicaciones y conectividad en el extremo austral de Chile. Demostramos que la distancia y el clima no son excusa.</p>
+        </div>
+      </div>
+
+      <div class="caso-card reveal" style="background: linear-gradient(160deg, #130a0a 0%, #1a0a0a 100%); border-color: rgba(204,0,0,.2);">
+        <div class="caso-card-inner">
+          <div class="caso-region">Fuerzas Armadas de Chile</div>
+          <div class="caso-name">Hospital Naval Cirujano Guzmán</div>
+          <p class="caso-desc">El sistema de salud de las Fuerzas Armadas nos eligió. Alta disponibilidad, seguridad operacional y continuidad bajo cualquier condición.</p>
+          <div class="caso-badge-military">Credencial Militar · FFAA Chile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ COBERTURA ═══ -->
+<section id="cobertura">
+  <div class="container">
+    <div class="cobertura-inner">
+      <div>
+        <div class="tag reveal">Cobertura Geográfica</div>
+        <h2 class="section-title reveal">No Venimos<br>a Visitar.<br><span class="accent">Vivimos Aquí.</span></h2>
+        <p class="section-body reveal">Mientras otros proveedores "estudian el terreno", nosotros llevamos décadas operando en las regiones mineras más importantes del país.</p>
+        <div class="cobertura-cities">
+          <div class="region-block reveal">
+            <div class="region-name">Región de Coquimbo</div>
+            <div class="city-item"><div class="city-dot"></div>Ovalle (sede principal)</div>
+            <div class="city-item"><div class="city-dot"></div>Monte Patria</div>
+            <div class="city-item"><div class="city-dot"></div>Combarbalá</div>
+            <div class="city-item"><div class="city-dot"></div>Illapel</div>
+            <div class="city-item"><div class="city-dot"></div>Salamanca</div>
+            <div class="city-item"><div class="city-dot"></div>Vicuña</div>
+          </div>
+          <div class="region-block reveal">
+            <div class="region-name">Región de Magallanes</div>
+            <div class="city-item"><div class="city-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div>Punta Arenas</div>
+            <div class="city-item"><div class="city-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div>Puerto Natales</div>
+            <div class="city-item"><div class="city-dot" style="background:var(--red);box-shadow:0 0 6px var(--red)"></div>Porvenir</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chile SVG Map -->
+      <div class="cobertura-map reveal">
+        <div class="chile-map-wrap">
+          <svg viewBox="0 0 200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Chile simplified silhouette -->
+            <path d="M110,15 C112,12 118,10 122,14 C130,20 135,30 132,45
+                     C128,60 120,75 118,90 C115,108 120,125 118,140
+                     C115,158 108,170 110,185 C112,200 120,210 118,228
+                     C116,245 108,258 110,272 C112,288 122,298 120,315
+                     C118,332 110,342 112,358 C113,372 120,382 118,398
+                     C116,415 105,425 100,440 C95,455 94,472 90,488
+                     C87,502 82,515 80,530 C77,548 78,565 74,580
+                     C71,592 65,600 62,612 C58,625 58,638 54,648
+                     C50,658 44,665 43,675 C42,682 46,688 50,690
+                     C56,692 64,688 70,682
+                     C76,676 78,668 82,660
+                     C88,650 96,642 100,632
+                     C105,622 106,612 108,600
+                     C111,588 116,578 118,565
+                     C120,552 118,538 120,525
+                     C122,511 128,500 128,486
+                     C128,470 124,455 126,440
+                     C128,424 135,412 136,396
+                     C137,380 132,365 133,350
+                     C134,334 140,320 140,305
+                     C140,288 135,272 136,256
+                     C137,240 142,226 142,210
+                     C142,194 138,180 140,165
+                     C142,148 148,134 148,118
+                     C148,100 142,84 140,68
+                     C138,52 135,36 128,24
+                     C124,18 116,14 110,15Z"
+                  fill="rgba(21,41,130,0.25)"
+                  stroke="rgba(21,41,130,0.6)"
+                  stroke-width="1.5"/>
+
+            <!-- Coquimbo dot (north) -->
+            <g class="map-point" transform="translate(118, 215)">
+              <circle cx="0" cy="0" r="6" fill="var(--navy)" opacity="0.9"/>
+              <circle cx="0" cy="0" r="12" fill="rgba(21,41,130,0.2)"/>
+              <text x="14" y="4" class="map-label" fill="#7A86A1" font-size="10" font-family="Space Mono">Coquimbo</text>
+            </g>
+
+            <!-- Magallanes dot (south) -->
+            <g class="map-point" transform="translate(85, 590)">
+              <circle cx="0" cy="0" r="6" fill="var(--red)" opacity="0.9"/>
+              <circle cx="0" cy="0" r="12" fill="rgba(204,0,0,0.2)"/>
+              <text x="14" y="4" class="map-label" fill="#7A86A1" font-size="10" font-family="Space Mono">Magallanes</text>
+            </g>
+
+            <!-- Connection line -->
+            <line x1="118" y1="215" x2="85" y2="590"
+                  stroke="rgba(21,41,130,0.25)"
+                  stroke-width="1"
+                  stroke-dasharray="4 4"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ MÉTRICAS ═══ -->
+<section id="metricas">
+  <div class="metricas-bg"></div>
+  <div class="container">
+    <div class="tag reveal">Datos que Hablan</div>
+    <h2 class="section-title reveal">Los Números<br>que <span class="accent">Importan</span></h2>
+    <div class="metricas-grid">
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="30">0</span><span class="acc">+</span></div>
+        <div class="metric-label">Años de operación continua sin interrupciones</div>
+        <div class="metric-source">Desde 1994</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="acc">+</span><span class="js-counter" data-to="180">0</span></div>
+        <div class="metric-label">Puntos de TV instalados en Hospital Provincial de Ovalle</div>
+        <div class="metric-source">Licitación pública adjudicada</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="5">0</span><span class="acc">/5</span></div>
+        <div class="metric-label">Score en Mercado Público · Cero sanciones en 24 meses</div>
+        <div class="metric-source">Ficha MP · acreditado hasta feb 2027</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="9">0</span><span class="acc"> +</span></div>
+        <div class="metric-label">Ciudades con infraestructura de red propia</div>
+        <div class="metric-source">Coquimbo + Magallanes</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="5">0</span></div>
+        <div class="metric-label">Hospitales con soluciones activas incluyendo Hospital Naval FA</div>
+        <div class="metric-source">Misión crítica · sector salud</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="62">0</span><span class="acc">M</span></div>
+        <div class="metric-label">CLP en ventas a sector público dic 2025–dic 2026</div>
+        <div class="metric-source">Ficha Mercado Público</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="js-counter" data-to="2">0</span></div>
+        <div class="metric-label">Regiones con infraestructura de fibra propia · norte y sur</div>
+        <div class="metric-source">Coquimbo · Magallanes</div>
+      </div>
+      <div class="metric-item reveal">
+        <div class="metric-val"><span class="acc">1</span></div>
+        <div class="metric-label">Instalación en Fuerzas Armadas · estándar de seguridad máximo</div>
+        <div class="metric-source">Hospital Naval Cirujano Guzmán</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DIFERENCIADORES ═══ -->
+<section id="diferenciadores">
+  <div class="container">
+    <div class="section-head">
+      <div class="tag reveal">Por Qué Nosotros</div>
+      <h2 class="section-title reveal">La Única Empresa<br>que Puede<br><span class="accent">Probarlo</span></h2>
+      <p class="section-body reveal">"Somos la única empresa en Chile que puede mostrarle a una minera fotografías reales de más de 180 puntos de televisión instalados en un hospital de alta complejidad —y ofrecerle exactamente la misma solución para su campamento."</p>
+    </div>
+
+    <div class="diff-cards">
+      <div class="diff-card reveal">
+        <div class="diff-num">01</div>
+        <div class="diff-title">Track Record Hospitalario</div>
+        <div class="diff-desc">La credencial de misión crítica más poderosa. Si funciona en un hospital, funciona en un campamento.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">02</div>
+        <div class="diff-title">Infraestructura Propia</div>
+        <div class="diff-desc">No subcontratamos la red. La operamos. Mayor control, menor latencia, respuesta directa ante fallas.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">03</div>
+        <div class="diff-title">Presencia Regional</div>
+        <div class="diff-desc">Coquimbo y Magallanes. No venimos a "estudiar el terreno". Llevamos décadas operando en él.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">04</div>
+        <div class="diff-title">Solución Integrada</div>
+        <div class="diff-desc">IPTV + fibra + soporte. Un proveedor, un contrato, un SLA. Sin fricciones entre sistemas.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">05</div>
+        <div class="diff-title">30 Años de Historia</div>
+        <div class="diff-desc">No es un pitch. Es un track record. Ninguna empresa nueva puede comprar tres décadas de cumplimiento.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">06</div>
+        <div class="diff-title">Confianza Militar</div>
+        <div class="diff-desc">Hospital Naval Cirujano Guzmán, FFAA Chile. El estándar de exigencia más alto del país. Lo cumplimos.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">07</div>
+        <div class="diff-title">Score 5/5 MP</div>
+        <div class="diff-desc">Transparencia total. Cero sanciones. Contratos que se cumplen. Acreditado hasta febrero 2027.</div>
+      </div>
+      <div class="diff-card reveal">
+        <div class="diff-num">08</div>
+        <div class="diff-title">Soporte en Terreno</div>
+        <div class="diff-desc">Técnicos en la región, no en Santiago. Respondemos en horas, no en días.</div>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div style="margin-top: 5rem;">
+      <div class="tag reveal">Análisis Comparativo</div>
+      <table class="comp-table reveal">
+        <thead>
+          <tr>
+            <th style="width:30%">Criterio</th>
+            <th class="our-col" style="width:35%">Cable Color · FibraCorp</th>
+            <th class="other-col" style="width:35%">Proveedor Metropolitano</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Presencia en Coquimbo</td>
+            <td class="our-col"><span class="check">✓</span> Infraestructura propia</td>
+            <td><span class="cross">✗</span> Subcontrata</td>
+          </tr>
+          <tr>
+            <td>Presencia en Magallanes</td>
+            <td class="our-col"><span class="check">✓</span> Infraestructura propia</td>
+            <td><span class="cross">✗</span> No llega o subcontrata</td>
+          </tr>
+          <tr>
+            <td>Track record hospitalario</td>
+            <td class="our-col"><span class="check">✓</span> 4 hospitales + 1 militar</td>
+            <td><span class="cross">✗</span> Generalmente no</td>
+          </tr>
+          <tr>
+            <td>Plataforma IPTV propia</td>
+            <td class="our-col"><span class="check">✓</span> CableColor TV</td>
+            <td><span class="cross">✗</span> Reventa de terceros</td>
+          </tr>
+          <tr>
+            <td>Soporte técnico en terreno</td>
+            <td class="our-col"><span class="check">✓</span> Equipo regional</td>
+            <td><span class="cross">✗</span> Despacho desde ciudad</td>
+          </tr>
+          <tr>
+            <td>Proveedor Hábil Mercado Público</td>
+            <td class="our-col"><span class="check">✓</span> Score 5/5</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td>Años de operación</td>
+            <td class="our-col"><span class="check">✓</span> 30 años</td>
+            <td>Variable</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACTO ═══ -->
+<section id="contacto">
+  <div class="contacto-bg"></div>
+  <div class="container">
+    <div class="contacto-inner">
+      <div>
+        <div class="tag reveal">Hablemos</div>
+        <div class="contacto-cta-big reveal">
+          Demos el<br>Siguiente<br><span class="red">Paso</span><br>Juntos
+        </div>
+        <p class="contacto-sub reveal">
+          Realizamos visitas de levantamiento técnico sin costo. En 48 horas tenemos una propuesta adaptada a los requerimientos exactos de su proyecto.
+        </p>
+        <div class="contact-persons">
+          <div class="contact-person reveal">
+            <div class="person-avatar">KR</div>
+            <div class="person-info">
+              <div class="person-name">Karina Rivera González</div>
+              <div class="person-role">Líder Comercial</div>
+              <div class="person-email">comercial@unolimitada.cl · +56 9 8902 8179</div>
+            </div>
+          </div>
+          <div class="contact-person reveal">
+            <div class="person-avatar">MC</div>
+            <div class="person-info">
+              <div class="person-name">Matías Castillo Jara</div>
+              <div class="person-role">Ejecutivo Comercial</div>
+              <div class="person-email">mcastillo@unolimitada.cl · +56 9 8447 5418</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <form class="contacto-form reveal" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombre</label>
+              <input class="form-input" type="text" placeholder="Su nombre">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Empresa</label>
+              <input class="form-input" type="text" placeholder="Empresa minera">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Región del proyecto</label>
+            <select class="form-select">
+              <option value="">Seleccione región</option>
+              <option>Región de Atacama</option>
+              <option>Región de Coquimbo</option>
+              <option>Región de Antofagasta</option>
+              <option>Región de Tarapacá</option>
+              <option>Región de Magallanes</option>
+              <option>Otra región</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tipo de proyecto</label>
+            <select class="form-select">
+              <option value="">¿Qué necesita?</option>
+              <option>Campamento minero — IPTV + Internet</option>
+              <option>Internet corporativo — FibraCorp</option>
+              <option>Televisión IPTV — CableColor TV</option>
+              <option>Infraestructura de red completa</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mensaje</label>
+            <textarea class="form-textarea" placeholder="Cuéntenos sobre su proyecto: número de habitaciones, ubicación, necesidades específicas..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Solicitar visita técnica sin compromiso →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="logos/cablecolor-logo-horizontal.png" alt="Cable Color">
+      </div>
+      <div class="footer-meta">
+        COMERCIALIZADORA Y SERVICIOS UNO LIMITADA · RUT 77.123.870-k<br>
+        Victoria 381 Of. 203, Ovalle, Región de Coquimbo · comercial@unolimitada.cl
+      </div>
+      <div class="footer-badges">
+        <div class="footer-badge green">Proveedor Hábil MP</div>
+        <div class="footer-badge">Score 5/5</div>
+        <div class="footer-badge">30+ Años</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─────────────────────────────────────────────
+     SCRIPTS
+───────────────────────────────────────────── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── NAV scroll state ── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ── Progress bar ── */
+const pb = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  pb.style.transform = `scaleX(${p})`;
+}, { passive: true });
+
+/* ── HERO entrance (ease-out snap, one-time) ── */
+const heroTL = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+heroTL
+  .to('#heroBg', { scale: 1, duration: 1.8, ease: 'power2.out' }, 0)
+  .to('#heroEyebrow', { opacity: 1, y: 0, duration: .7 }, .3)
+  .to('#heroTitle .line span', {
+    y: '0%',
+    duration: .9,
+    stagger: .12,
+    ease: 'power4.out'
+  }, .5)
+  .to('#heroSubtitle', { opacity: 1, y: 0, duration: .7 }, 1.0)
+  .to('#heroActions', { opacity: 1, y: 0, duration: .6 }, 1.2)
+  .to('.stat-item', { opacity: 1, y: 0, duration: .5, stagger: .08, ease: 'power2.out' }, 1.4);
+
+/* ── Scroll reveals (batch for performance) ── */
+ScrollTrigger.batch('.reveal', {
+  interval: 0.1,
+  batchMax: 5,
+  onEnter: (elements) => {
+    gsap.to(elements, {
+      opacity: 1,
+      y: 0,
+      duration: .7,
+      stagger: .08,
+      ease: 'power3.out'
+    });
+  },
+  start: 'top 88%'
+});
+
+/* ── Animated counters (fire once on enter) ── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.to, 10);
+  const duration = Math.min(2.5, target / 30);
+  gsap.fromTo(el,
+    { innerText: 0 },
+    {
+      innerText: target,
+      duration,
+      ease: 'power2.out',
+      snap: { innerText: 1 },
+      onUpdate() { el.innerText = Math.round(this.targets()[0].innerText); }
+    }
+  );
+}
+
+document.querySelectorAll('.js-counter').forEach(el => {
+  ScrollTrigger.create({
+    trigger: el,
+    start: 'top 85%',
+    once: true,
+    onEnter: () => animateCounter(el)
+  });
+});
+
+/* ── Parallax hero bg on scroll ── */
+gsap.to('#heroBg', {
+  yPercent: 20,
+  ease: 'none',
+  scrollTrigger: {
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: true
+  }
+});
+
+/* ── Chile map dots sequential reveal ── */
+ScrollTrigger.create({
+  trigger: '#cobertura',
+  start: 'top 70%',
+  once: true,
+  onEnter: () => {
+    gsap.fromTo('.map-point',
+      { opacity: 0, scale: 0 },
+      { opacity: 1, scale: 1, duration: .5, stagger: .3, ease: 'back.out(2)', transformOrigin: 'center' }
+    );
+  }
+});
+
+/* ── Form submit ── */
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  const orig = btn.textContent;
+  btn.textContent = '¡Mensaje enviado! Le contactaremos a la brevedad.';
+  btn.style.background = '#166534';
+  setTimeout(() => {
+    btn.textContent = orig;
+    btn.style.background = '';
+    e.target.reset();
+  }, 4000);
+}
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>

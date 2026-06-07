@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dossier corporativo — Comercializadora y Servicios Uno Ltda. Cable Color · TV Red · FibraCorp · Sector minero y hospitality.">
+  <title>Dossier Corporativo · Cable Color · FibraCorp</title>
+  <link rel="preload" href="logos/cablecolor-logo-horizontal-sm.png" as="image" type="image/png" fetchpriority="high">
+  <link rel="preload" href="logos/cablecolor-logo-horizontal-alt.png" as="image" type="image/png">
+  <link rel="preload" href="assets/stock/patagonia.jpg" as="image" type="image/jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
+  <link rel="stylesheet" href="css/icons.css">
+  <link rel="stylesheet" href="css/dossier.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/timeline.css">
+  <link rel="stylesheet" href="css/ambient.css">
+</head>
+<body class="site-body is-loading">
+
+  <div class="site-preloader" id="sitePreloader" role="status" aria-live="polite" aria-label="Cargando dossier corporativo">
+    <div class="site-preloader__inner">
+      <img src="logos/cablecolor-logo-horizontal-alt.png" alt="Cable Color" class="site-preloader__logo" width="200" height="21" decoding="sync">
+      <p class="site-preloader__label">Dossier corporativo</p>
+      <div class="site-preloader__track" aria-hidden="true"><span class="site-preloader__fill" id="preloaderFill"></span></div>
+    </div>
+  </div>
+
+  <div class="ambient" aria-hidden="true" id="ambientLayer">
+    <div class="ambient__mesh"></div>
+    <div class="ambient__grain"></div>
+    <div class="ambient__orb ambient__orb--navy" data-orb="navy"></div>
+    <div class="ambient__orb ambient__orb--red" data-orb="red"></div>
+    <div class="ambient__orb ambient__orb--blue" data-orb="blue"></div>
+    <div class="ambient__orb ambient__orb--warm" data-orb="warm"></div>
+    <div class="ambient__sparkles" id="ambientSparkles"></div>
+  </div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 7l10 7 10-7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-fiber" viewBox="0 0 24 24"><path d="M4 12h16M4 12a2 2 0 110-4M4 12a2 2 0 100 4M20 12a2 2 0 110-4M20 12a2 2 0 100 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M13 21V11l6-3v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 9h1M9 13h1M9 17h1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v8M5 12H2a10 10 0 0020 0h-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-4.35 7-11a7 7 0 10-14 0c0 6.65 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><rect x="2" y="15" width="20" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 6h.01M6 18h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 14.5L7 22l5-2.5L17 22l-1.5-7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 20a7 7 0 0114 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+
+  <header class="site-header">
+    <a href="#inicio" class="site-header__brand">
+      <img src="logos/cablecolor-logo-horizontal-sm.png" alt="Cable Color" class="site-header__logo" width="209" height="22" decoding="async" fetchpriority="high">
+      <span class="site-header__tag">Dossier Corporativo</span>
+    </a>
+    <nav class="site-nav" id="siteNav" aria-label="Secciones del dossier">
+      <a href="#inicio" data-section="inicio">Inicio</a>
+      <a href="#quienes" data-section="quienes">Quiénes somos</a>
+      <a href="#experiencia" data-section="experiencia">Experiencia</a>
+      <a href="#solucion" data-section="solucion">Solución</a>
+      <a href="#contacto" data-section="contacto">Contacto</a>
+    </nav>
+    <div class="site-header__actions">
+      <span class="site-header__conf">Confidencial</span>
+      <a href="#contacto" class="btn btn--header">Contacto</a>
+      <button type="button" class="site-menu-btn" id="siteMenuBtn" aria-label="Abrir menú">
+        <span class="icon icon--md"><svg><use href="#i-menu"/></svg></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="site-main">
+
+    <!-- 001 · HERO -->
+    <section class="site-hero site-section" id="inicio">
+      <div class="ambient-hero" aria-hidden="true">
+        <div class="ambient-hero__beam ambient-hero__beam--red"></div>
+        <div class="ambient-hero__beam ambient-hero__beam--blue"></div>
+      </div>
+      <div class="site-hero__inner">
+        <p class="site-hero__overline"><span class="section-label__num">001</span> · Dossier corporativo · Comercializadora y Servicios Uno Ltda.</p>
+        <div class="site-hero__brands">
+          <img src="logos/cablecolor-logo-horizontal-alt.png" alt="Cable Color" class="site-hero__brand-logo" width="267" height="28" decoding="async" fetchpriority="high">
+          <span>TV Red</span>
+          <span class="accent">FibraCorp</span>
+          <span>Fibra Educa</span>
+        </div>
+        <p class="site-hero__issuer">RUT 77.123.870-k · Victoria 381 Of. 203, Ovalle · Proveedor HÁBIL Mercado Público</p>
+        <h1>Ya implementamos una solución similar en un hospital de alta complejidad y tenemos la capacidad técnica y operacional para replicarla en su proyecto.</h1>
+        <p class="site-hero__lead">Servicio de TV Corporativo + Internet FibraCorp · Hospitales, campamentos mineros y proyectos hospitality</p>
+        <div class="hero-stats" data-reveal-stagger>
+          <div class="hero-stat reveal">
+            <span class="hero-stat__icon icon icon--sm"><svg><use href="#i-clock"/></svg></span>
+            <strong>30</strong><span>Años operación</span>
+          </div>
+          <div class="hero-stat reveal">
+            <span class="hero-stat__icon icon icon--sm"><svg><use href="#i-tv"/></svg></span>
+            <strong>+180</strong><span>Puntos TV Ovalle</span>
+          </div>
+          <div class="hero-stat reveal">
+            <span class="hero-stat__icon icon icon--sm"><svg><use href="#i-building"/></svg></span>
+            <strong>4+1</strong><span>Hospitales + naval</span>
+          </div>
+          <div class="hero-stat reveal">
+            <span class="hero-stat__icon icon icon--sm"><svg><use href="#i-award"/></svg></span>
+            <strong>5/5</strong><span>Mercado Público</span>
+          </div>
+          <div class="hero-stat reveal">
+            <span class="hero-stat__icon icon icon--sm"><svg><use href="#i-pin"/></svg></span>
+            <strong>9</strong><span>Ciudades</span>
+          </div>
+        </div>
+        <div class="hero-actions reveal">
+          <a href="#quienes" class="btn btn--sm">Recorrer el dossier <span class="btn__arrow">→</span></a>
+          <a href="#contacto" class="btn btn--ghost btn--sm">Ver contacto</a>
+        </div>
+      </div>
+      <span class="hero-scroll">Scroll</span>
+    </section>
+
+    <!-- STORY TIMELINE · recorrido por partes -->
+    <div class="story-timeline" id="storyTimeline">
+      <div class="story-timeline__inner">
+        <div class="story-timeline__rail" aria-hidden="true">
+          <div class="story-timeline__line"></div>
+          <div class="story-timeline__fill" id="timelineFill"></div>
+        </div>
+
+        <!-- Paso 01 · Quiénes somos -->
+        <article class="timeline-step site-section" id="quienes">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/data-center.jpg" alt="Infraestructura de telecomunicaciones" loading="lazy">
+              <figcaption>Infraestructura propia · Coquimbo y Magallanes</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-server"/></svg></span>
+                <span class="timeline-step__label">01 · Quiénes somos</span>
+              </div>
+              <h2 class="timeline-step__title">Comercializadora y Servicios Uno Ltda.</h2>
+              <p class="timeline-step__lead">Empresa chilena de telecomunicaciones con 30 años de experiencia en el diseño, implementación y operación de soluciones de conectividad, televisión digital, redes corporativas e infraestructura tecnológica para clientes residenciales, empresariales e institucionales.</p>
+              <p class="timeline-step__lead timeline-step__lead--compact">Nuestra experiencia incluye proyectos para instituciones de salud, educación, organismos públicos, empresas privadas y organizaciones estratégicas, participando activamente en procesos públicos y privados mediante Mercado Público y contratación directa.</p>
+              <div class="timeline-step__stat">
+                <strong>30</strong>
+                <span>Años de operación</span>
+              </div>
+              <p class="timeline-step__list-label">Qué hacemos</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-map"/></svg></span> Infraestructura propia en Coquimbo y Magallanes</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-building"/></svg></span> Proyectos en salud, educación, organismos públicos y empresas privadas</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-award"/></svg></span> Mercado Público y contratación directa</li>
+              </ul>
+              <div class="timeline-step__brands">
+                <img src="logos/cablecolor-logo-horizontal-sm.png" alt="Cable Color" width="209" height="22" loading="lazy" decoding="async">
+                <img src="logos/tvred-logo-sm.png" alt="TV Red" width="100" height="35" loading="lazy" decoding="async">
+                <img src="logos/fibracorp-banner.jpg" alt="FibraCorp" width="160" height="24" loading="lazy" decoding="async">
+                <span>Fibra Educa</span>
+              </div>
+              <div class="timeline-step__actions">
+                <a href="#cobertura" class="btn btn--sm">Ver cobertura <span class="btn__arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 02 · Mercado Público · Ficha oficial -->
+        <article class="timeline-step timeline-step--flip site-section" id="mercado-publico">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/executive-meeting.jpg" alt="Gestión corporativa y cumplimiento contractual" loading="lazy">
+              <span class="timeline-step__badge timeline-step__badge--primary">Proveedor HÁBIL</span>
+              <figcaption>Ficha Mercado Público · 6 jun 2026</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-shield"/></svg></span>
+                <span class="timeline-step__label">01 · Credibilidad · Mercado Público</span>
+              </div>
+              <h2 class="timeline-step__title">Registro oficial de proveedor del Estado</h2>
+              <p class="timeline-step__lead">Comercializadora y Servicios Uno Limitada (nombre de fantasía TVRED) cumple los requisitos de inscripción en el Registro de Proveedores, con comportamiento base 5/5 y cero sanciones en los últimos 24 meses.</p>
+              <div class="mp-ficha">
+                <div class="mp-ficha__grid">
+                  <div class="mp-ficha__item mp-ficha__item--highlight">
+                    <strong>5/5</strong>
+                    <span>Comportamiento base</span>
+                    <small>Sin sanciones · 24 meses</small>
+                  </div>
+                  <div class="mp-ficha__item">
+                    <strong>$62.456.092</strong>
+                    <span>Ventas Mercado Público</span>
+                    <small>Dic 2025 – dic 2026</small>
+                  </div>
+                  <div class="mp-ficha__item">
+                    <strong>HÁBIL</strong>
+                    <span>Estado de habilidad</span>
+                    <small>Registro de Proveedores</small>
+                  </div>
+                  <div class="mp-ficha__item">
+                    <strong>01-02-2027</strong>
+                    <span>Acreditación vigente</span>
+                    <small>Proveedor acreditado</small>
+                  </div>
+                </div>
+                <p class="mp-ficha__meta">RUT 77.123.870-k · Domicilio legal Victoria 381 Of. 203, Ovalle · Representante legal Rodrigo Alejandro Jara Ovalle</p>
+              </div>
+              <div class="timeline-step__actions">
+                <a href="Ficha_PDF_20260606_10_29.pdf" class="btn btn--sm btn--ghost" target="_blank" rel="noopener">Ver ficha PDF <span class="btn__arrow">→</span></a>
+                <a href="#cobertura" class="btn btn--sm">Ver cobertura <span class="btn__arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 03 · Presencia regional -->
+        <article class="timeline-step timeline-step--flip site-section" id="cobertura">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--map" id="coverageMapScene">
+              <div id="coverageMap" class="coverage-map" role="img" aria-label="Mapa de cobertura en Coquimbo y Magallanes"></div>
+              <div class="coverage-map__legend">
+                <div class="coverage-map__legend-item">
+                  <span class="coverage-dot coverage-dot--coquimbo"></span>
+                  <span><strong>Coquimbo</strong> · Cable Color / FibraCorp</span>
+                </div>
+                <div class="coverage-map__legend-item">
+                  <span class="coverage-dot coverage-dot--magallanes"></span>
+                  <span><strong>Magallanes</strong> · TV Red</span>
+                </div>
+              </div>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-map"/></svg></span>
+                <span class="timeline-step__label">02 · Presencia regional</span>
+              </div>
+              <h2 class="timeline-step__title">Chile de punta a punta</h2>
+              <p class="timeline-step__lead">A través de Cable Color y TV Red operamos infraestructura propia en las regiones de Coquimbo y Magallanes, entregando servicios de Internet, televisión, redes de datos y soluciones tecnológicas para organizaciones que requieren altos niveles de disponibilidad y continuidad operacional.</p>
+              <div class="timeline-step__stat">
+                <strong>9</strong>
+                <span>Ciudades con cobertura</span>
+              </div>
+              <p class="timeline-step__list-label">Coquimbo · Cable Color · FibraCorp · Fibra Educa</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-pin"/></svg></span> Ovalle · Monte Patria · Combarbalá</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-pin"/></svg></span> Illapel · Salamanca · Vicuña</li>
+              </ul>
+              <p class="timeline-step__list-label">Magallanes · TV Red</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-pin"/></svg></span> Punta Arenas · Puerto Natales · Porvenir</li>
+              </ul>
+              <div class="timeline-step__actions">
+                <a href="#experiencia" class="btn btn--sm">Ver experiencia <span class="btn__arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 03 · Hospital Ovalle (caso principal) -->
+        <article class="timeline-step timeline-step--featured site-section" id="experiencia">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/hospital-modern.jpg" alt="Hospital Provincial de Ovalle" loading="lazy" class="timeline-step__img--ovalle">
+              <span class="timeline-step__badge timeline-step__badge--primary">Caso principal · Coquimbo</span>
+              <figcaption>Imagen referencial · reemplazar por fotografía institucional del recinto</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-activity"/></svg></span>
+                <span class="timeline-step__label">03 · Experiencia · Salud</span>
+              </div>
+              <h2 class="timeline-step__title">Hospital Provincial de Ovalle</h2>
+              <p class="timeline-step__lead">Proyecto de conectividad y televisión para pacientes. Implementación y operación de una solución integral de telecomunicaciones orientada a mejorar la experiencia de pacientes y usuarios, incorporando servicios de televisión, infraestructura de red, conectividad y soporte especializado.</p>
+              <div class="timeline-step__stat">
+                <strong>+180</strong>
+                <span>Puntos de televisión</span>
+              </div>
+              <p class="timeline-step__list-label">Alcance del proyecto</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-tv"/></svg></span> Más de 180 puntos de televisión distribuidos en múltiples edificios</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-server"/></svg></span> Infraestructura de telecomunicaciones y conectividad</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-layers"/></svg></span> Integración de servicios en distintas áreas clínicas</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span> Soporte técnico permanente</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-clock"/></svg></span> Mantención correctiva y continuidad operacional</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-award"/></svg></span> Solución implementada mediante licitación pública adjudicada</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 04 · Hospital Salamanca -->
+        <article class="timeline-step timeline-step--flip site-section" id="experiencia-salamanca">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/hospital-corridor.jpg" alt="Hospital de Salamanca" loading="lazy" class="timeline-step__img--salamanca">
+              <span class="timeline-step__badge">Coquimbo</span>
+              <figcaption>Imagen referencial · sector salud</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-building"/></svg></span>
+                <span class="timeline-step__label">03 · Experiencia · Salamanca</span>
+              </div>
+              <h2 class="timeline-step__title">Hospital de Salamanca</h2>
+              <p class="timeline-step__lead">Prestación de servicios de telecomunicaciones y conectividad para dependencias asistenciales, contribuyendo a la continuidad de procesos clínicos y administrativos.</p>
+              <p class="timeline-step__list-label">Servicios entregados</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-fiber"/></svg></span> Conectividad para áreas asistenciales</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-activity"/></svg></span> Continuidad de procesos clínicos y administrativos</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span> Soporte técnico especializado</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 05 · Hospital Illapel -->
+        <article class="timeline-step site-section" id="experiencia-illapel">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/hospital-corridor.jpg" alt="Hospital de Illapel" loading="lazy" class="timeline-step__img--illapel">
+              <span class="timeline-step__badge">Coquimbo</span>
+              <figcaption>Imagen referencial · sector salud</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-building"/></svg></span>
+                <span class="timeline-step__label">03 · Experiencia · Illapel</span>
+              </div>
+              <h2 class="timeline-step__title">Hospital de Illapel</h2>
+              <p class="timeline-step__lead">Implementación y operación de servicios de telecomunicaciones destinados a garantizar conectividad estable y soporte especializado para la operación del establecimiento.</p>
+              <p class="timeline-step__list-label">Enfoque del proyecto</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-fiber"/></svg></span> Conectividad estable en operación continua</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-server"/></svg></span> Infraestructura de telecomunicaciones</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-clock"/></svg></span> Mantención y respuesta técnica</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 06 · Hospital Magallanes -->
+        <article class="timeline-step timeline-step--flip site-section" id="experiencia-magallanes">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/hospital-modern.jpg" alt="Hospital Clínico de Magallanes Dr. Lautaro Navarro Avaria" loading="lazy" class="timeline-step__img--magallanes">
+              <span class="timeline-step__badge timeline-step__badge--south">Magallanes</span>
+              <figcaption>Imagen referencial · reemplazar por fotografía institucional del recinto</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-building"/></svg></span>
+                <span class="timeline-step__label">03 · Experiencia · Magallanes</span>
+              </div>
+              <h2 class="timeline-step__title">Hospital Clínico de Magallanes</h2>
+              <p class="timeline-step__subtitle">Dr. Lautaro Navarro Avaria</p>
+              <p class="timeline-step__lead">Participación en procesos licitatorios adjudicados para la provisión de servicios de telecomunicaciones y conectividad en uno de los principales centros asistenciales de la Región de Magallanes.</p>
+              <div class="timeline-step__stat">
+                <strong>TV Red</strong>
+                <span>Infraestructura propia austral</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 07 · Hospital Naval -->
+        <article class="timeline-step site-section" id="experiencia-naval">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/hospital-modern.jpg" alt="Hospital Naval Cirujano Guzmán" loading="lazy" class="timeline-step__img--naval">
+              <span class="timeline-step__badge timeline-step__badge--naval">Organismos estratégicos</span>
+              <figcaption>Imagen referencial · reemplazar por fotografía institucional del recinto</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-anchor"/></svg></span>
+                <span class="timeline-step__label">03 · Experiencia · Naval</span>
+              </div>
+              <h2 class="timeline-step__title">Hospital Naval Cirujano Guzmán</h2>
+              <p class="timeline-step__lead">Prestación de servicios de telecomunicaciones para una institución perteneciente al sistema de salud de las Fuerzas Armadas de Chile, cumpliendo exigentes estándares de disponibilidad, seguridad y continuidad operacional.</p>
+              <p class="timeline-step__list-label">Estándares cumplidos</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span> Alta disponibilidad y continuidad operacional</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-check"/></svg></span> Seguridad en entornos de misión crítica</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-clock"/></svg></span> Soporte técnico permanente</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 08 · Nuestra experiencia -->
+        <article class="timeline-step timeline-step--summary site-section" id="experiencia-resumen">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__card timeline-step__card--wide">
+            <div class="timeline-step__card-head">
+              <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-shield"/></svg></span>
+              <span class="timeline-step__label">03 · Nuestra experiencia</span>
+            </div>
+            <h2 class="timeline-step__title">Capacidad probada en entornos de alta criticidad</h2>
+            <p class="timeline-step__lead">La experiencia acumulada en hospitales, instituciones públicas y organismos estratégicos nos ha permitido desarrollar capacidades especializadas para diseñar, implementar y operar soluciones de telecomunicaciones en entornos de alta criticidad.</p>
+            <p class="timeline-step__lead timeline-step__lead--compact">Nuestro enfoque combina infraestructura robusta, conectividad de alta disponibilidad, soporte técnico especializado y capacidad de respuesta permanente, factores esenciales para organizaciones donde la continuidad operacional es un requisito fundamental.</p>
+            <div class="timeline-step__pillars">
+              <div class="timeline-step__pillar">
+                <span class="timeline-step__pillar-icon icon icon--md"><svg><use href="#i-server"/></svg></span>
+                <strong>Infraestructura</strong><span>Robusta y propia</span>
+              </div>
+              <div class="timeline-step__pillar">
+                <span class="timeline-step__pillar-icon icon icon--md"><svg><use href="#i-fiber"/></svg></span>
+                <strong>Conectividad</strong><span>Alta disponibilidad</span>
+              </div>
+              <div class="timeline-step__pillar">
+                <span class="timeline-step__pillar-icon icon icon--md"><svg><use href="#i-phone"/></svg></span>
+                <strong>Soporte</strong><span>Respuesta permanente</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 09 · CableColor TV -->
+        <article class="timeline-step timeline-step--flip site-section" id="solucion">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--duo timeline-step__media--overlay">
+              <img src="assets/stock/santiago-skyline.jpg" alt="Skyline de Santiago de Chile con la cordillera de los Andes" loading="lazy" class="timeline-step__media-main timeline-step__img--santiago">
+              <img src="assets/stock/hospital-digital-care.jpg" alt="Atención clínica con tecnología en entorno hospitalario" loading="lazy" class="timeline-step__media-secondary timeline-step__img--care">
+              <figcaption>Imagen referencial · Chile · sector salud y conectividad corporativa</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-tv"/></svg></span>
+                <span class="timeline-step__label">04 · Servicio · CableColor TV</span>
+              </div>
+              <h2 class="timeline-step__title">Televisión digital e IPTV corporativa</h2>
+              <p class="timeline-step__lead">CableColor TV es nuestra plataforma de televisión digital e IPTV, diseñada para entregar una experiencia moderna, intuitiva y de alta calidad a usuarios de hospitales, campamentos mineros, hoteles corporativos y proyectos Hospitality. Permite acceder a contenidos en vivo desde múltiples dispositivos, con interfaz amigable, arquitectura escalable, estabilidad operativa y administración centralizada bajo un único proveedor tecnológico.</p>
+              <div class="timeline-step__stat">
+                <strong>8</strong>
+                <span>Beneficios clave</span>
+              </div>
+              <p class="timeline-step__list-label">Principales beneficios</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-check"/></svg></span> Interfaz moderna e intuitiva</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-layers"/></svg></span> Acceso multiplataforma</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span> Alta estabilidad y disponibilidad</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-server"/></svg></span> Administración centralizada</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-layers"/></svg></span> Escalabilidad según las necesidades del proyecto</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-fiber"/></svg></span> Integración con servicios de conectividad de alta velocidad</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span> Soporte técnico especializado</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-activity"/></svg></span> Mejora de la experiencia de usuarios, pacientes y huéspedes</li>
+              </ul>
+              <div class="timeline-step__actions">
+                <a href="#solucion-integrada" class="btn btn--sm">Ver propuesta integrada <span class="btn__arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Paso 10 · Propuesta integrada -->
+        <article class="timeline-step site-section" id="solucion-integrada">
+          <div class="timeline-step__marker" aria-hidden="true"></div>
+          <div class="timeline-step__grid">
+            <figure class="timeline-step__media timeline-step__media--overlay">
+              <img src="assets/stock/fiber-optic.jpg" alt="Infraestructura FibraCorp" loading="lazy">
+              <figcaption>FibraCorp · conectividad de alta velocidad</figcaption>
+            </figure>
+            <div class="timeline-step__card">
+              <div class="timeline-step__card-head">
+                <span class="timeline-step__card-icon icon icon--md"><svg><use href="#i-fiber"/></svg></span>
+                <span class="timeline-step__label">04 · Servicio · FibraCorp</span>
+              </div>
+              <h2 class="timeline-step__title">TV + Internet bajo un solo proveedor</h2>
+              <p class="timeline-step__lead">Nuestra propuesta combina la plataforma CableColor TV con conectividad de alta velocidad sobre infraestructura de fibra óptica, permitiendo soportar simultáneamente servicios de entretenimiento, acceso a Internet y aplicaciones corporativas bajo estándares de disponibilidad y continuidad operacional acordes a organizaciones de misión crítica.</p>
+              <div class="timeline-step__stat">
+                <strong>1</strong>
+                <span>Proveedor · una red · un contrato</span>
+              </div>
+              <p class="timeline-step__list-label">Qué integra</p>
+              <ul class="timeline-step__list timeline-step__list--icons">
+                <li><span class="icon icon--sm"><svg><use href="#i-tv"/></svg></span> Entretenimiento y acceso a Internet simultáneo</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-shield"/></svg></span> Disponibilidad y continuidad operacional</li>
+                <li><span class="icon icon--sm"><svg><use href="#i-server"/></svg></span> Infraestructura propia operada directamente</li>
+              </ul>
+              <div class="timeline-step__actions">
+                <a href="#contacto" class="btn btn--sm">Ver contacto <span class="btn__arrow">→</span></a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-band">
+      <div class="cta-band__inner">
+        <p class="section-label">Mensaje central</p>
+        <h3>Ya implementamos una solución similar en un hospital de alta complejidad y tenemos la capacidad técnica y operacional para replicarla en su proyecto.</h3>
+        <a href="#contacto" class="btn btn--sm btn--outline">Ver contacto comercial <span class="btn__arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- 04 · CONTACTO -->
+    <section class="site-section site-section--alt" id="contacto">
+      <div class="site-section__inner">
+        <p class="section-label reveal"><span class="section-label__num">04</span> · Contacto</p>
+        <h2 class="reveal">Contacto</h2>
+        <p class="section-lead reveal">Quedamos a disposición para profundizar los aspectos técnicos, realizar visitas de levantamiento y desarrollar una propuesta definitiva acorde a los requerimientos del proyecto.</p>
+
+        <div class="contact-table-wrap reveal">
+          <table class="contact-table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-user"/></svg></span> Nombre</span></th>
+                <th scope="col">Cargo</th>
+                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span> Correo laboral</span></th>
+                <th scope="col"><span class="contact-table__th"><span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span> Teléfono laboral</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Rodrigo Alejandro Jara Ovalle</strong></td>
+                <td>Gerente General</td>
+                <td><a href="mailto:rjara@unolimitada.cl">rjara@unolimitada.cl</a></td>
+                <td class="contact-table__na" aria-label="Teléfono no publicado">—</td>
+              </tr>
+              <tr>
+                <td><strong>Karina Sofía Rivera González</strong></td>
+                <td>Líder Comercial</td>
+                <td><a href="mailto:comercial@unolimitada.cl">comercial@unolimitada.cl</a></td>
+                <td><a href="tel:+56989028179">+56 9 8902 8179</a></td>
+              </tr>
+              <tr>
+                <td><strong>Matías Alonso Castillo Jara</strong></td>
+                <td>Ejecutivo Comercial</td>
+                <td><a href="mailto:mcastillo@unolimitada.cl">mcastillo@unolimitada.cl</a></td>
+                <td><a href="tel:+56984475418">+56 9 8447 5418</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="contact-actions reveal">
+          <a href="mailto:comercial@unolimitada.cl" class="btn btn--sm">
+            <span class="icon icon--sm"><svg><use href="#i-mail"/></svg></span>
+            comercial@unolimitada.cl
+          </a>
+          <a href="tel:+56989028179" class="btn btn--ghost btn--sm">
+            <span class="icon icon--sm"><svg><use href="#i-phone"/></svg></span>
+            +56 9 8902 8179
+          </a>
+        </div>
+
+        <p class="legal u-mt reveal">COMERCIALIZADORA Y SERVICIOS UNO LIMITADA · RUT 77.123.870-k · Nombre de fantasía TVRED<br>Victoria 381 Of. 203, Ovalle, Región de Coquimbo · <a href="Ficha_PDF_20260606_10_29.pdf" target="_blank" rel="noopener">Ficha Mercado Público (jun 2026)</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="site-footer__brand">
+        <img src="logos/cablecolor-logo-horizontal-alt.png" alt="Cable Color" width="160" height="17" loading="lazy" decoding="async">
+        <p>Conectividad y TV corporativa · Coquimbo y Magallanes</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#quienes">Quiénes somos</a></li>
+          <li><a href="#experiencia">Experiencia</a></li>
+          <li><a href="#solucion">Solución</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Marcas</h4>
+        <ul>
+          <li><a href="#solucion">CableColor TV</a></li>
+          <li><a href="#solucion">FibraCorp</a></li>
+          <li><a href="#quienes">TV Red · Fibra Educa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Formato</h4>
+        <ul>
+          <li><a href="Ficha_PDF_20260606_10_29.pdf" target="_blank" rel="noopener">Ficha Mercado Público</a></li>
+          <li><a href="deck.html">Versión presentación (12 láminas)</a></li>
+          <li><a href="mailto:comercial@unolimitada.cl">comercial@unolimitada.cl</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <span>© 2026 Comercializadora y Servicios Uno Ltda. · Documento confidencial · MP 5/5 HÁBIL</span>
+      <span>Ovalle, Región de Coquimbo · Chile</span>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="js/site.js"></script>
+</body>
+</html>
