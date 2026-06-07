@@ -380,6 +380,235 @@
   z-index: 2;
 }
 
+/* Showcase IPTV — carrusel producto */
+.timeline-step__media--iptv {
+  aspect-ratio: auto;
+  min-height: 380px;
+  background: var(--navy-deep);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-step__media--iptv > .iptv-showcase {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.iptv-showcase__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem 0.5rem;
+}
+
+.iptv-showcase__brand {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.iptv-showcase__counter {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+
+.iptv-showcase__viewport {
+  position: relative;
+  flex: 1;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+.iptv-showcase__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+}
+
+.iptv-showcase__slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.65s var(--ease),
+    visibility 0.65s var(--ease);
+}
+
+.iptv-showcase__slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.iptv-showcase__slide img {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  object-fit: contain;
+  object-position: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(21, 41, 130, 0.18) 0%, transparent 70%);
+}
+
+.iptv-showcase__caption {
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0.55rem 0.85rem 0.65rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
+  background: linear-gradient(to top, rgba(11, 20, 64, 0.92) 0%, rgba(11, 20, 64, 0.55) 100%);
+}
+
+.iptv-showcase__progress {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.iptv-showcase__progress-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: var(--red);
+  border-radius: inherit;
+}
+
+.iptv-showcase__footer {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.65rem 0.7rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.iptv-showcase__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: background 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+.iptv-showcase__nav:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.iptv-showcase__nav:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.iptv-showcase__nav:active {
+  transform: scale(0.96);
+}
+
+.iptv-showcase__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.iptv-showcase__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease), width 0.25s var(--ease);
+}
+
+.iptv-showcase__dot.is-active {
+  width: 1.35rem;
+  border-radius: var(--radius-pill);
+  background: var(--red);
+}
+
+.iptv-showcase__dot:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.timeline-step__media--iptv figcaption {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  margin: 0;
+  padding: 0.45rem 0.85rem 0.55rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0;
+}
+
+.timeline-step.is-active .timeline-step__media--iptv {
+  box-shadow:
+    0 4px 24px rgba(11, 20, 64, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iptv-showcase__slide {
+    transition: none;
+  }
+
+  .iptv-showcase__progress {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .timeline-step__media--iptv {
+    min-height: 340px;
+  }
+
+  .iptv-showcase__viewport,
+  .iptv-showcase__track {
+    min-height: 240px;
+  }
+
+  .iptv-showcase__caption {
+    font-size: 0.625rem;
+    padding-inline: 0.65rem;
+  }
+}
+
 .contact-actions {
   display: flex;
   flex-wrap: wrap;
@@ -395,64 +624,223 @@
   max-width: 52ch;
 }
 
-/* Ficha Mercado Público */
+/* Ficha Mercado Público — credencial institucional */
 .mp-ficha {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
 }
 
-.mp-ficha__grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.65rem;
-  margin-bottom: 1rem;
+.mp-ficha__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
 }
 
-.mp-ficha__item {
-  padding: 0.85rem 0.95rem;
-  background: var(--paper);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-}
-
-.mp-ficha__item--highlight {
-  border-color: rgba(21, 41, 130, 0.22);
-  background: linear-gradient(145deg, rgba(21, 41, 130, 0.06) 0%, var(--paper) 100%);
-}
-
-.mp-ficha__item strong {
-  display: block;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+.mp-ficha__seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.5625rem;
   font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--navy);
-  line-height: 1.1;
-  letter-spacing: var(--tracking-tight);
-  margin-bottom: 0.25rem;
+  background: rgba(21, 41, 130, 0.06);
+  border: 1px solid rgba(21, 41, 130, 0.12);
+  border-radius: var(--radius-pill);
 }
 
-.mp-ficha__item span {
-  display: block;
-  font-size: 0.6875rem;
+.mp-ficha__seal .icon {
+  color: var(--navy);
+}
+
+.mp-ficha__source {
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.mp-ficha__panel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 246, 250, 0.65) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+.mp-ficha__score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.15rem 1.25rem;
+  min-width: 7.5rem;
+  background: rgba(21, 41, 130, 0.04);
+  border-right: 1px solid var(--border);
+  text-align: center;
+}
+
+.mp-ficha__score-ring {
+  display: grid;
+  place-items: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  border: 2px solid rgba(21, 41, 130, 0.18);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.95) 0%, rgba(244, 246, 250, 0.4) 100%);
+  box-shadow: 0 0 0 4px rgba(21, 41, 130, 0.05);
+}
+
+.mp-ficha__score-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--navy);
+  line-height: 1;
+}
+
+.mp-ficha__score-label {
+  font-size: 0.625rem;
   font-weight: 600;
   color: var(--ink-secondary);
+  line-height: 1.3;
+}
+
+.mp-ficha__score-note {
+  font-size: 0.5625rem;
+  color: var(--muted);
   line-height: 1.35;
 }
 
-.mp-ficha__item small {
-  display: block;
-  margin-top: 0.25rem;
-  font-size: 0.5625rem;
-  color: var(--muted);
-  letter-spacing: 0.02em;
+.mp-ficha__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
 }
 
-.mp-ficha__meta {
-  font-size: 0.625rem;
-  line-height: 1.6;
+.mp-ficha__metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-right: 1px solid var(--border);
+}
+
+.mp-ficha__metric:last-child {
+  border-right: none;
+}
+
+.mp-ficha__metric-label {
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--muted);
+}
+
+.mp-ficha__metric-value {
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.mp-ficha__metric-note {
+  font-size: 0.5625rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.mp-ficha__legal {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.mp-ficha__legal-item {
+  min-width: 0;
+}
+
+.mp-ficha__legal dt {
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.2rem;
+}
+
+.mp-ficha__legal dd {
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: var(--ink-secondary);
+}
+
+.timeline-step.is-active .mp-ficha__panel {
+  border-color: rgba(21, 41, 130, 0.22);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 28px rgba(11, 20, 64, 0.06);
+}
+
+@media (max-width: 820px) {
+  .mp-ficha__panel {
+    grid-template-columns: 1fr;
+  }
+
+  .mp-ficha__score {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+    padding: 1rem 1.1rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+
+  .mp-ficha__score-ring {
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+  }
+
+  .mp-ficha__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .mp-ficha__metric {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mp-ficha__metric:last-child {
+    border-bottom: none;
+  }
+
+  .mp-ficha__legal {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
 }
 
 @media (max-width: 640px) {
-  .mp-ficha__grid { grid-template-columns: 1fr; }
   .timeline-step__pillars { grid-template-columns: 1fr; }
 }
 

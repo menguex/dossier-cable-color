@@ -409,7 +409,138 @@
   initSparkles();
   initPreloader();
   initCoverageMap();
+  initIptvShowcase();
+  initCompanyDialog();
   onScroll();
+
+  function initCompanyDialog() {
+    const dialog = document.getElementById('companyInfoDialog');
+    const openBtn = document.getElementById('companyInfoBtn');
+    if (!dialog || !openBtn) return;
+
+    openBtn.addEventListener('click', function () {
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+    });
+
+    dialog.querySelectorAll('[data-dialog-close]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        dialog.close();
+      });
+    });
+
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+
+  /* IPTV product showcase carousel */
+  function initIptvShowcase() {
+    const root = document.querySelector('[data-iptv-showcase]');
+    if (!root) return;
+
+    const step = root.closest('.timeline-step');
+    const slides = Array.from(root.querySelectorAll('.iptv-showcase__slide'));
+    const dots = Array.from(root.querySelectorAll('.iptv-showcase__dot'));
+    const prevBtn = root.querySelector('[data-dir="prev"]');
+    const nextBtn = root.querySelector('[data-dir="next"]');
+    const progressFill = root.querySelector('.iptv-showcase__progress-fill');
+    const counterCurrent = root.querySelector('.iptv-showcase__counter-current');
+    const INTERVAL = 5500;
+    let index = 0;
+    let timer = null;
+
+    function restartProgress() {
+      if (!progressFill || reducedMotion) return;
+      progressFill.style.transition = 'none';
+      progressFill.style.width = '0%';
+      requestAnimationFrame(function () {
+        progressFill.style.transition = 'width ' + INTERVAL + 'ms linear';
+        progressFill.style.width = '100%';
+      });
+    }
+
+    function goTo(nextIndex) {
+      index = (nextIndex + slides.length) % slides.length;
+      slides.forEach(function (slide, i) {
+        const active = i === index;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      dots.forEach(function (dot, i) {
+        const active = i === index;
+        dot.classList.toggle('is-active', active);
+        dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+      if (counterCurrent) counterCurrent.textContent = String(index + 1);
+      restartProgress();
+    }
+
+    function stopAutoplay() {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+      if (progressFill) {
+        progressFill.style.transition = 'none';
+        progressFill.style.width = '0%';
+      }
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      if (reducedMotion || !step || !step.classList.contains('is-active')) return;
+      restartProgress();
+      timer = window.setInterval(function () {
+        goTo(index + 1);
+      }, INTERVAL);
+    }
+
+    function onPrev() {
+      goTo(index - 1);
+      startAutoplay();
+    }
+
+    function onNext() {
+      goTo(index + 1);
+      startAutoplay();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', onPrev);
+    if (nextBtn) nextBtn.addEventListener('click', onNext);
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        goTo(Number(dot.dataset.index));
+        startAutoplay();
+      });
+    });
+
+    root.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        onPrev();
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        onNext();
+      }
+    });
+
+    root.addEventListener('mouseenter', stopAutoplay);
+    root.addEventListener('mouseleave', startAutoplay);
+    root.addEventListener('focusin', stopAutoplay);
+    root.addEventListener('focusout', function (event) {
+      if (!root.contains(event.relatedTarget)) startAutoplay();
+    });
+
+    if (step) {
+      const observer = new MutationObserver(function () {
+        if (step.classList.contains('is-active')) startAutoplay();
+        else stopAutoplay();
+      });
+      observer.observe(step, { attributes: true, attributeFilter: ['class'] });
+      if (step.classList.contains('is-active')) startAutoplay();
+    }
+
+    goTo(0);
+  }
 
   /* Precarga: logo header, hero y fondo del hero */
   function initPreloader() {
