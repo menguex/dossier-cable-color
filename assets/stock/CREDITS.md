@@ -6,7 +6,7 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 |---------|----------------|--------|
 | patagonia.jpg | Hero (fondo) | Unsplash |
 | data-center.jpg | Quiénes somos · infraestructura | Unsplash |
-| hospital-modern.jpg | Reserva | Unsplash |
+| hospital-modern.jpg | Experiencia · entornos de alta criticidad | Unsplash |
 | ovalle.png | Hospital Provincial de Ovalle | Cliente · carpeta `fotos/` |
 | salamanca.jpg | Hospital de Salamanca | Cliente · carpeta `fotos/` |
 | illapel.png | Hospital / CESFAM Illapel | Cliente · carpeta `fotos/` |
@@ -18,6 +18,5 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 | santiago-skyline.jpg | CableColor TV · skyline Santiago de Chile | Unsplash |
 | hospital-digital-care.jpg | CableColor TV · atención clínica digital | Unsplash |
 | hospital-modern-care.jpg | Reserva | Unsplash |
-| critical-infrastructure.jpg | Experiencia · entornos de alta criticidad | [Unsplash](https://unsplash.com/photos/photo-of-server-racks-in-a-room-1558494949) |
 
 **Prioridad:** todas las fotos de hospitales del dossier usan imágenes reales del cliente.
