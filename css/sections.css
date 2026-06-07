@@ -44,8 +44,10 @@ body.site-body.is-loading {
 }
 
 .site-preloader__logo {
-  height: 28px;
+  max-height: 28px;
   width: auto;
+  max-width: none;
+  object-fit: contain;
   animation: preloaderLogoIn 0.7s var(--ease) both;
 }
 
@@ -144,7 +146,13 @@ body.site-body.is-loading {
   color: inherit;
 }
 
-.site-header__logo { height: 22px; width: auto; flex-shrink: 0; }
+.site-header__logo {
+  max-height: 22px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  flex-shrink: 0;
+}
 
 .site-header__tag {
   font-size: 0.625rem;
@@ -334,7 +342,12 @@ body.site-body.is-loading {
   font-weight: 600;
 }
 
-.site-hero__brand-logo { height: 28px; width: auto; }
+.site-hero__brand-logo {
+  max-height: 28px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
 
 .site-hero__issuer {
   font-size: var(--text-xs);
@@ -471,12 +484,23 @@ body.site-body.is-loading {
 .cta-band .section-label { color: #FF8A8A; justify-content: center; }
 
 .cta-band h3 {
-  font-size: var(--text-xl);
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
   font-weight: 700;
-  line-height: 1.45;
-  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 0.85rem;
   text-wrap: balance;
-  min-height: 4.5em;
+}
+
+.cta-band__lead {
+  font-size: var(--text-sm);
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: 1.35rem;
+  line-height: 1.7;
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-wrap: balance;
 }
 
 .cta-band p {
@@ -634,12 +658,13 @@ body.site-body.is-loading {
 }
 
 .brand-row__logo {
-  height: 28px;
   width: auto;
-  max-width: 140px;
+  max-width: none;
   object-fit: contain;
+  object-position: left center;
 }
 
+.brand-row__logo--cablecolor { max-height: 28px; }
 .brand-row__logo--tvred { max-height: 36px; max-width: 100px; }
 .brand-row__logo--fibracorp { max-height: 32px; max-width: 160px; }
 
@@ -810,7 +835,15 @@ body.site-body.is-loading {
   gap: 2rem;
 }
 
-.site-footer__brand img { height: 24px; margin-bottom: 0.75rem; filter: brightness(0) invert(1); opacity: 0.9; }
+.site-footer__brand img {
+  max-height: 24px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  margin-bottom: 0.75rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
 
 .site-footer__brand p {
   font-size: var(--text-xs);

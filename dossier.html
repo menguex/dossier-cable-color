@@ -82,7 +82,12 @@ nav.scrolled {
   padding: 14px 40px;
   border-bottom: 1px solid var(--line);
 }
-.nav-logo img { height: 36px; }
+.nav-logo img {
+  max-height: 36px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+}
 .nav-links {
   display: flex; gap: 2rem;
   font-size: .85rem;
@@ -949,7 +954,13 @@ footer {
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 1.5rem;
 }
-.footer-logo img { height: 28px; opacity: .7; }
+.footer-logo img {
+  max-height: 28px;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  opacity: .7;
+}
 .footer-meta {
   font-family: var(--mono);
   font-size: .68rem;
@@ -1024,7 +1035,7 @@ footer {
 <!-- NAV -->
 <nav id="navbar">
   <a class="nav-logo" href="#hero">
-    <img src="logos/cablecolor-logo-horizontal.png" alt="Cable Color">
+    <img src="logos/cablecolor-logo-horizontal-sm.png" alt="Cable Color" width="420" height="44">
   </a>
   <ul class="nav-links">
     <li><a href="#historia">Historia</a></li>
@@ -1585,14 +1596,6 @@ footer {
               <div class="person-email">comercial@unolimitada.cl · +56 9 8902 8179</div>
             </div>
           </div>
-          <div class="contact-person reveal">
-            <div class="person-avatar">MC</div>
-            <div class="person-info">
-              <div class="person-name">Matías Castillo Jara</div>
-              <div class="person-role">Ejecutivo Comercial</div>
-              <div class="person-email">mcastillo@unolimitada.cl · +56 9 8447 5418</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -1647,7 +1650,7 @@ footer {
   <div class="container">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="logos/cablecolor-logo-horizontal.png" alt="Cable Color">
+        <img src="logos/cablecolor-logo-horizontal-sm.png" alt="Cable Color" width="420" height="44">
       </div>
       <div class="footer-meta">
         COMERCIALIZADORA Y SERVICIOS UNO LIMITADA · RUT 77.123.870-k<br>

@@ -809,11 +809,15 @@
 }
 
 .timeline-step__brands img {
-  height: 22px;
   width: auto;
-  max-width: 110px;
+  max-width: none;
   object-fit: contain;
+  object-position: left center;
 }
+
+.timeline-step__brands .brand-logo--cablecolor { max-height: 22px; }
+.timeline-step__brands .brand-logo--tvred { max-height: 28px; }
+.timeline-step__brands .brand-logo--fibracorp { max-height: 20px; max-width: 150px; }
 
 .timeline-step__brands span {
   font-size: var(--text-xs);
