@@ -18,5 +18,6 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 | santiago-skyline.jpg | CableColor TV · skyline Santiago de Chile | Unsplash |
 | hospital-digital-care.jpg | CableColor TV · atención clínica digital | Unsplash |
 | hospital-modern-care.jpg | Reserva | Unsplash |
+| critical-infrastructure.jpg | Experiencia · entornos de alta criticidad | [Unsplash](https://unsplash.com/photos/photo-of-server-racks-in-a-room-1558494949) |
 
 **Prioridad:** todas las fotos de hospitales del dossier usan imágenes reales del cliente.

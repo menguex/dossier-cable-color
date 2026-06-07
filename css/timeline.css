@@ -283,6 +283,16 @@
   top: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+.timeline-step--summary .timeline-step__media {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+.timeline-step__img--critical {
+  object-position: center 42%;
+}
+
 .timeline-step__card--wide {
   grid-column: 3;
   max-width: none;
@@ -1254,6 +1264,10 @@
   .timeline-step--summary {
     display: block;
     padding-left: 2rem;
+  }
+
+  .timeline-step--summary .timeline-step__media {
+    margin-bottom: 1.25rem;
   }
 
   .timeline-step--summary .timeline-step__card--wide {

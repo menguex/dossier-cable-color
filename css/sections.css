@@ -44,10 +44,11 @@ body.site-body.is-loading {
 }
 
 .site-preloader__logo {
-  max-height: 28px;
+  max-height: 32px;
   width: auto;
   max-width: none;
   object-fit: contain;
+  filter: none;
   animation: preloaderLogoIn 0.7s var(--ease) both;
 }
 
@@ -915,7 +916,15 @@ body.site-body.is-loading {
 
 .contact-footer__head {
   max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  text-align: center;
+}
+
+.contact-footer__head .section-label {
+  justify-content: center;
+  width: 100%;
 }
 
 .section-label--light {
@@ -929,11 +938,13 @@ body.site-body.is-loading {
 .contact-footer h2 {
   color: var(--white);
   max-width: 16ch;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 0.85rem;
 }
 
 .contact-footer__lead {
-  margin: 0;
+  margin: 0 auto;
   max-width: 52ch;
   font-size: var(--text-sm);
   line-height: 1.65;
