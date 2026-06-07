@@ -3,3 +3,5 @@
 .cursor/
 *.log
 .vercel
+.tools/
+node_modules/
