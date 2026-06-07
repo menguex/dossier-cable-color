@@ -6,8 +6,11 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 |---------|----------------|--------|
 | patagonia.jpg | Hero (fondo) | Unsplash |
 | data-center.jpg | Quiénes somos · infraestructura | Unsplash |
-| hospital-modern.jpg | Ovalle, Magallanes, Naval (recortes distintos) | Unsplash |
-| hospital-corridor.jpg | Salamanca, Illapel (recortes distintos) | Unsplash |
+| hospital-modern.jpg | Ovalle (pendiente foto real) | Unsplash |
+| salamanca.jpg | Hospital de Salamanca | Cliente · carpeta `fotos/` |
+| illapel.png | Hospital / CESFAM Illapel | Cliente · carpeta `fotos/` |
+| magallanes.png | Hospital Clínico de Magallanes | Cliente · carpeta `fotos/` |
+| naval.png | Hospital Naval Cirujano Guzmán | Cliente · carpeta `fotos/` |
 | fiber-optic.jpg | FibraCorp | Unsplash |
 | network-tech.jpg | Reserva / conectividad | Unsplash |
 | executive-meeting.jpg | Mercado Público · credibilidad | Unsplash |
@@ -15,4 +18,4 @@ Imágenes bajo licencia [Unsplash License](https://unsplash.com/license). Uso ed
 | hospital-digital-care.jpg | CableColor TV · atención clínica digital | Unsplash |
 | hospital-modern-care.jpg | Reserva | Unsplash |
 
-**Prioridad:** reemplazar por fotografías reales de Ovalle, Naval Guzmán y Hospital Clínico de Magallanes (PDF oficial).
+**Prioridad:** reemplazar por fotografía real del Hospital Provincial de Ovalle (único recinto que aún usa stock).

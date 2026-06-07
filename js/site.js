@@ -191,13 +191,27 @@
   }
 
   /* Leaflet map */
-  function createMarkerIcon(className) {
+  function createMarkerIcon(className, isHub, label) {
+    const hubClass = isHub ? ' map-marker--hub' : '';
+    const pulseClass = isHub ? ' map-marker-pulse--hub' : '';
+    const pulseRegion = className.indexOf('coquimbo') !== -1 ? 'coquimbo' : 'magallanes';
+    const labelHtml = isHub && label
+      ? '<span class="map-marker-label">' + label + '</span>'
+      : '';
+
     return L.divIcon({
       className: 'map-marker-wrap',
-      html: '<span class="map-marker ' + className + '"></span>',
-      iconSize: [14, 14],
-      iconAnchor: [7, 7]
+      html:
+        '<span class="map-marker-pulse map-marker-pulse--' + pulseRegion + pulseClass + '"></span>' +
+        '<span class="map-marker ' + className + hubClass + '">' + labelHtml + '</span>',
+      iconSize: isHub ? [18, 18] : [14, 14],
+      iconAnchor: isHub ? [9, 9] : [7, 7]
     });
+  }
+
+  function buildPopup(city, region, brand) {
+    return '<strong>' + city.name + '</strong>' + region + ' · ' + brand +
+      (city.hub ? '<br><em>Nodo principal</em>' : '');
   }
 
   function initCoverageMap() {
@@ -206,6 +220,8 @@
 
     const coquimboCities = [
       { name: 'Ovalle', lat: -30.597, lng: -71.199, hub: true },
+      { name: 'Monte Patria', lat: -30.752, lng: -70.988 },
+      { name: 'Combarbalá', lat: -31.166, lng: -71.053 },
       { name: 'Illapel', lat: -31.634, lng: -71.165 },
       { name: 'Salamanca', lat: -31.778, lng: -70.963 },
       { name: 'Vicuña', lat: -30.032, lng: -70.708 }
@@ -220,30 +236,60 @@
     coverageMap = L.map('coverageMap', {
       scrollWheelZoom: false,
       dragging: !reducedMotion,
-      zoomControl: true,
-      attributionControl: true
+      zoomControl: false,
+      attributionControl: true,
+      maxBounds: [[-56.5, -76.5], [-17.5, -66.5]],
+      maxBoundsViscosity: 0.85
     });
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; CARTO',
+    L.control.zoom({ position: 'bottomright' }).addTo(coverageMap);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
-      maxZoom: 12,
-      minZoom: 3
+      maxZoom: 11,
+      minZoom: 4
+    }).addTo(coverageMap);
+
+    L.circle([-30.95, -71.05], {
+      radius: 95000,
+      color: '#0098FF',
+      weight: 2,
+      opacity: 0.55,
+      fillColor: '#0098FF',
+      fillOpacity: 0.08,
+      className: 'map-coverage-ring'
+    }).addTo(coverageMap);
+
+    L.circle([-52.45, -71.25], {
+      radius: 120000,
+      color: '#CC0000',
+      weight: 2,
+      opacity: 0.5,
+      fillColor: '#CC0000',
+      fillOpacity: 0.07,
+      className: 'map-coverage-ring'
     }).addTo(coverageMap);
 
     const allMarkers = [];
 
     coquimboCities.forEach(city => {
       const marker = L.marker([city.lat, city.lng], {
-        icon: createMarkerIcon('map-marker--coquimbo')
-      }).addTo(coverageMap).bindPopup('<strong>' + city.name + '</strong><br>Coquimbo · Cable Color / FibraCorp');
+        icon: createMarkerIcon('map-marker--coquimbo', !!city.hub, city.hub ? city.name : null)
+      }).addTo(coverageMap).bindPopup(
+        buildPopup(city, 'Coquimbo', 'Cable Color / FibraCorp'),
+        { className: 'coverage-popup', maxWidth: 220 }
+      );
       allMarkers.push(marker);
     });
 
     magallanesCities.forEach(city => {
       const marker = L.marker([city.lat, city.lng], {
-        icon: createMarkerIcon('map-marker--magallanes')
-      }).addTo(coverageMap).bindPopup('<strong>' + city.name + '</strong><br>Magallanes · TV Red');
+        icon: createMarkerIcon('map-marker--magallanes', !!city.hub, city.hub ? city.name : null)
+      }).addTo(coverageMap).bindPopup(
+        buildPopup(city, 'Magallanes', 'TV Red'),
+        { className: 'coverage-popup', maxWidth: 220 }
+      );
       allMarkers.push(marker);
     });
 
@@ -251,14 +297,34 @@
     const magallanesHub = magallanesCities.find(c => c.hub);
 
     if (coquimboHub && magallanesHub) {
-      L.polyline(
-        [[coquimboHub.lat, coquimboHub.lng], [-42.5, -72.5], [magallanesHub.lat, magallanesHub.lng]],
-        { color: '#152982', weight: 2, opacity: 0.45, dashArray: '10 8', lineCap: 'round' }
-      ).addTo(coverageMap);
+      const arcPoints = [
+        [coquimboHub.lat, coquimboHub.lng],
+        [-34.5, -71.8],
+        [-40.0, -72.2],
+        [-46.5, -72.0],
+        [magallanesHub.lat, magallanesHub.lng]
+      ];
+
+      L.polyline(arcPoints, {
+        color: '#152982',
+        weight: 2.5,
+        opacity: 0.35,
+        dashArray: '12 10',
+        lineCap: 'round',
+        className: 'map-arc-line'
+      }).addTo(coverageMap);
+
+      L.polyline(arcPoints, {
+        color: '#0098FF',
+        weight: 1.5,
+        opacity: 0.22,
+        dashArray: '4 14',
+        lineCap: 'round'
+      }).addTo(coverageMap);
     }
 
     mapBounds = L.latLngBounds(allMarkers.map(m => m.getLatLng()));
-    coverageMap.fitBounds(mapBounds, { padding: [48, 48], maxZoom: 5 });
+    coverageMap.fitBounds(mapBounds, { padding: [72, 72], maxZoom: 5 });
 
     /* Fly-in when map enters viewport */
     if (!reducedMotion) {
@@ -266,9 +332,9 @@
         entries.forEach(entry => {
           if (entry.isIntersecting && coverageMap) {
             coverageMap.flyToBounds(mapBounds, {
-              padding: [48, 48],
-              duration: 1.4,
-              easeLinearity: 0.25
+              padding: [72, 72],
+              duration: 1.6,
+              easeLinearity: 0.22
             });
             mapObserver.disconnect();
           }
